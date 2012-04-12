@@ -1,0 +1,14 @@
+%table
+  %tr
+    %td Drafted Players
+  -@team.draft_picks.each do |draft_pick|
+    %tr
+      %td= draft_pick.player.rank
+      %td= draft_pick.player.name
+      %td= "Round:#{draft_pick.round} | Pick:#{draft_pick.pick}"        
+  %tr
+    %td Undrafted Players
+  -@players.each do |player|
+    %tr
+      %td= player.rank
+      %td= player.name

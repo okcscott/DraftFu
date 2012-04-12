@@ -1,0 +1,8 @@
+%p= "On the clock: #{@league.current_team.name}"
+%p= "Round: #{@league.round} | Pick: #{@league.pick}"
+- @league.available_players.each do |player|
+  .player
+    %span
+      %b= player.rank
+    %span= player.name
+    =link_to "draft", "#", class: "draft_player", data: {team: @league.current_team.id, player: player.id}

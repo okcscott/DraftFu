@@ -1,0 +1,13 @@
+%h2 Players
+
+-if @players.empty?
+  %p
+    You need to create a player
+    = link_to "click here", new_player_path
+-else
+  %ul
+    - @players.each do |player|
+      %li
+        = player.name
+        =link_to "edit", edit_player_path(player)
+    %li=link_to "add another team", new_player_path

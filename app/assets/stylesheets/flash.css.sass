@@ -1,0 +1,34 @@
+@import "compass"
+@import "compass/css3"
+
+#flash_msg
+  background: #fff
+  background: none repeat scroll 0 0 rgba(250, 250, 250, 0.95)
+  border-bottom: 1px solid #4F4F4F
+  cursor: pointer
+  height: 55px
+  left: 0
+  line-height: 55px
+  position: fixed
+  top: 0
+  width: 100%
+  z-index: 9999
+  @include box-shadow(0px 1px 15px rgba(0,0,0,0.7))
+
+  .wrapper
+    width: 1280px
+    margin: 0 auto
+
+  p
+    margin: 0 80px
+    font:
+      size: 16px
+      weight: bold
+    padding-left: 35px
+
+  .notice
+    background: url("/assets/glyphicons_206_ok_2.png") no-repeat 0 18px
+
+  .alert
+    background: url("/assets/glyphicons_207_remove_2.png") no-repeat 0 18px
+    color: red

@@ -1,0 +1,15 @@
+= form_for @player do |f|
+  .field
+    =f.label :name
+    =f.text_field :name
+  .field
+    =f.label :position
+    =f.text_field :position
+  .field
+    =f.label :yahooid
+    =f.text_field :yahooid
+  .field
+    =f.label :rank
+    =f.text_field :rank
+  .actions
+    =f.submit

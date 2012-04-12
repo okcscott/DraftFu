@@ -1,0 +1,32 @@
+= form_for @league do |f|
+  -if @league.errors.any?
+    .error_messages
+      %ul
+        -for message in @league.errors.full_messages
+          %li=message
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :roster_spots
+    = f.text_field :roster_spots
+  .field
+    = f.label :starting_qb
+    = f.text_field :starting_qb
+  .field
+    = f.label :starting_wr
+    = f.text_field :starting_wr
+  .field
+    = f.label :starting_rb
+    = f.text_field :starting_rb
+  .field
+    = f.label :starting_te
+    = f.text_field :starting_te
+  .field
+    = f.label :starting_k
+    = f.text_field :starting_k
+  .field
+    = f.label :starting_def
+    = f.text_field :starting_def
+  .actions
+    = f.submit

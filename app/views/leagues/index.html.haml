@@ -1,0 +1,13 @@
+%h2 Leagues
+
+- if !@leagues.empty?
+  %ul
+    - @leagues.each do |league|
+      %li
+        =league.name
+        =link_to "manage", league_path(league)
+    %li=link_to "add another", new_league_path      
+- else
+  %p
+    You need to create a league
+    = link_to "click here", new_league_path

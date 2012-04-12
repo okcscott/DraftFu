@@ -1,0 +1,15 @@
+= form_for @team do |f|
+  -if @team.errors.any?
+    .error_messages
+      %ul
+        -for message in @team.errors.full_messages
+          %li=message
+  .field
+    =f.label :name
+    =f.text_field :name
+  .field
+    =f.label :pick
+    =f.text_field :pick
+  =f.hidden_field :league_id
+  .actions
+    =f.submit
