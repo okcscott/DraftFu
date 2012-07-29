@@ -8,8 +8,7 @@ class League < ActiveRecord::Base
   
   def available_players
     player_ids = self.players.map(&:id)
-    puts player_ids.count
-    Player.where("id NOT IN (?)", player_ids.empty? ? "" : player_ids).order(:rank)
+    Player.exclude(player_ids)
   end
   
   def current_pick
@@ -32,6 +31,11 @@ class League < ActiveRecord::Base
     else
       self.pick += 1
     end
+    self
+  end
+
+  def player_available(player_id)
+    self.available_players.any? {|x| x[:id] == player_id}
   end
   
   def make_pick(team_id, player_id)
@@ -43,5 +47,9 @@ class League < ActiveRecord::Base
       self.move_to_the_next_pick
     end
     pick  
+  end
+
+  def to_param
+    "#{slug}"
   end
 end

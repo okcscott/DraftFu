@@ -36,4 +36,8 @@ class LeaguesController < ApplicationController
     @league = League.find(params[:id])
   end
 
+  def draft
+    @league = League.find(params[:id])
+  end
+
 end

@@ -9,9 +9,20 @@ class DraftController < ApplicationController
   def player
     @team = Team.find(params[:team_id])
     @player = Player.find(params[:player_id])
-    @draftPick = @team.league.current_pick
-    pick = @team.league.make_pick(params[:team_id],params[:player_id])
-    
-    render json: pick
+    @league = @team.league
+    @draftPick = @league.current_pick
+
+    #make sure this is the current pick
+    if(@draftPick.team_id == @team.id && @league.player_available(@player.id))
+      @draftPick.player_id = @player.id
+      if @draftPick.save
+        @league.move_to_the_next_pick.save
+        render json: @draftPick
+      else
+        render json: @draftPick.errors, status: :unprocessable_entity
+      end
+    else
+      render json: "Error Message", status: :unprocessable_entity
+    end
   end
 end

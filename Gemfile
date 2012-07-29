@@ -24,6 +24,7 @@ group :test, :development do
 end
 
 gem 'jquery-rails'
+gem "haml-rails"
 
 gem "capybara"
 gem 'capybara-webkit'

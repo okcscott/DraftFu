@@ -9,8 +9,8 @@ class HomeController < ApplicationController
   def import
     # spider = ImportPlayers::Yahoo.new
     # spider.get_results
-    #     
-    # render action: "index", notice: "Player import was successful"
+        
+    render action: "index", notice: "Player import was successful"
   end
 
 end

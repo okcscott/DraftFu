@@ -17,15 +17,24 @@ Draftfu::Application.routes.draw do
   
   resources :users
   resources :sessions
-  resources :leagues
-  resources :teams do
-    member do
-      get 'draft'
+
+  resources :leagues do
+    get 'draftboard', on: :member
+    get 'draft', on: :member
+    resources :teams do
+      get 'draft', on: :member
     end
   end
   resources :players
   
   root :to => "home#index"
+
+  namespace :api do
+    get "players" => "players#index", as: :api_players
+    get "players/available"
+    post "players/draft"
+    get "leagues/current_pick" => "leagues#current_pick"
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
