@@ -8,7 +8,7 @@ class Api::PlayersController < ApplicationController
   end
 
   def available
-    limit = params[:count]
+    limit = params[:count] || 10
     name = params[:name]
     position = params[:position]
     #get the ID's of selected players
@@ -18,14 +18,19 @@ class Api::PlayersController < ApplicationController
     player_scope = Player.exclude(player_ids).limit(limit)
 
     if name
-      player_scope = player_scope.where("(LOWER(players.name) LIKE ?)", "%#{name}%")
+      player_scope = player_scope.where("(LOWER(players.name) LIKE ?)", "%#{name.downcase}%")
     end
 
-    if position
+    if !position.blank?
       player_scope = player_scope.where("players.position = ?", position)
     end
 
     respond_with player_scope
+  end
+
+  def drafted
+    @team = Team.find(params[:team_id])
+    render json: @team.players
   end
 
   def find_league
@@ -45,12 +50,14 @@ class Api::PlayersController < ApplicationController
       @draftPick.player_id = @player.id
       if @draftPick.save
         @league.move_to_the_next_pick.save
+        @league.current_pick
+        Pusher['draft'].trigger('pick_made', {:message => {draftPick: @draftPick.to_json, player: @player.to_json, team: @team.to_json}})
         render json: @draftPick
       else
         render json: @draftPick.errors, status: :unprocessable_entity
       end
     else
-      render json: "Error Message", status: :unprocessable_entity
+      render json: "Something Went Wrong!", status: :unprocessable_entity
     end
   end
 end

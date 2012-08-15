@@ -38,6 +38,7 @@ class LeaguesController < ApplicationController
 
   def draft
     @league = League.find(params[:id])
+    @current_pick = @league.current_pick
   end
 
 end

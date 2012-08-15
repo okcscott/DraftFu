@@ -15,7 +15,7 @@ class League < ActiveRecord::Base
     #check the leagues current round and pick
     #if there is no draft pick for that slot
     #create one (new pick) otherwise, return it
-    self.draftPicks.where(round: self.round, pick: self.pick).first or current_team.draftPicks.build(round: self.round, pick: self.pick)    
+    self.draftPicks.where(round: self.round, pick: self.pick).first || current_team.draftPicks.create(round: self.round, pick: self.pick, timestamp: Time.now)
   end
   
   def current_team

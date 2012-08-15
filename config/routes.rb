@@ -3,8 +3,6 @@ Draftfu::Application.routes.draw do
   get "draft/league/:league_id" => "draft#league", as: :league_draft
 
   match "draft/team/:league_id" => "draft#team", as: :team_draft
-
-  match "teams/new/:league_id" => "teams#new"
   
   match "draft/player" => "draft#player", via: :post
 
@@ -32,6 +30,7 @@ Draftfu::Application.routes.draw do
   namespace :api do
     get "players" => "players#index", as: :api_players
     get "players/available"
+    get "players/drafted"
     post "players/draft"
     get "leagues/current_pick" => "leagues#current_pick"
   end

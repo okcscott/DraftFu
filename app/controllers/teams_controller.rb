@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
   def new
-    @team = current_user.leagues.find(params[:league_id]).teams.new
+    @league = League.find(params[:league_id])
+    @team = @league.teams.new
   end
 
   def create
@@ -8,7 +9,7 @@ class TeamsController < ApplicationController
     @team = @league.teams.new(params[:team])
     
     if @team.save
-      redirect_to league_url(@league), notice: "Team was successfully created."
+      redirect_to league_url(@league.id), notice: "Team was successfully created."
     else
       render :new
     end
@@ -29,7 +30,8 @@ class TeamsController < ApplicationController
   
   def draft
     @team = Team.find(params[:id])
-    @players = @team.league.available_players
+    @league = League.find(params[:league_id])
+    @current_pick = @league.current_pick
   end
 
 end

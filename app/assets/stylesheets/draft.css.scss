@@ -1,3 +1,127 @@
 // Place all the styles related to the Draft controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.clear {
+  clear: both;
+}
+
+#round_info {
+  padding: 20px;
+  color: #999;
+  background-color: #333;
+  font-size: 20px;
+  position: relative;
+
+  span {
+    color: #fff;
+  }
+
+  .draft_clock {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    right: 0;
+    background-color: #d33;
+    span {
+      margin-top: 20px;
+      display: block;
+      text-align: center;
+    }
+  }
+
+  .current_drafter {
+    float: left;
+    margin-right: 20px;
+  }
+  .current_round {
+    float: left;
+    margin-right: 20px;
+  }
+  .current_pick {
+    float: left;
+    margin-right: 20px;
+  }
+}
+.player {
+  background-color: #eee;
+  padding: 10px;
+  margin-bottom: 20px;
+  .profile_pic {
+    width: 35px;
+    float: left;
+  }
+  .info {
+    float: left;
+    margin-left: 20px;
+    .name {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    .team {
+      font-weight: normal;
+      color: #999;
+    }
+    &.QB .name {
+      color: #8AC010;
+    }
+    &.RB .name {
+      color: #FA6900;
+    }
+    &.WR .name {
+      color: #00A0B0;
+    }
+    &.TE .name {
+      color: #CC333F;
+    }
+    &.K .name {
+      color: #F56991;
+    }
+  }
+  .draft {
+    float: right;
+    margin-top: 5px;
+  }
+  .round {
+    float: right;
+    font-size: 20px;
+    margin-top: 12px;
+    color: #999;
+  }
+}
+.undrafted {
+  background: #EEE;
+  padding: 25px;
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 30px;
+  border: dashed 1px #BBB;
+  color: #BBB;
+}
+
+.filters {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  .positions {
+    float: left;
+    margin-right: 10px;   
+    margin-top: 10px;
+    a {
+      padding: 10px;
+      &.active {
+        background-color: #ddd;
+      }
+    }
+  }
+  .player_search {
+    float: left;
+    margin-right: 10px;
+    padding: 15px;
+    font-size: 15px;
+    width: 130px;
+  }
+  .player_search_button {
+    float: left;
+  }
+}

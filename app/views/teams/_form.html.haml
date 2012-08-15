@@ -1,4 +1,4 @@
-= form_for @team do |f|
+= form_for [:league, @team] do |f|
   -if @team.errors.any?
     .error_messages
       %ul

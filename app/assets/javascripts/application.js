@@ -6,4 +6,22 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require draft
+//= require bootstrap-modal
+//= require underscore
+//= require backbone
+//= require backbone_rails_sync
+//= require backbone_datalink
+//= require backbone/models/player
+//= require backbone/models/players
+//= require backbone/models/draftedplayers
+//= require backbone/models/draftpick
+//= require backbone/models/timer
+//= require backbone/models/leagueInfo
+//= require backbone/views/players
+//= require backbone/views/roundInfo
+//= require backbone/views/confirmPick
+//= require backbone/views/leagueInfo
+//= require backbone/views/draftView
+//= require backbone/views/pickMade
+//= require backbone/draftfu

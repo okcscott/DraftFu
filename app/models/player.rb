@@ -4,5 +4,5 @@ class Player < ActiveRecord::Base
   has_many :leagues, through: :teams
 
   default_scope order(:rank)
-  scope :exclude, lambda {|players| where("id NOT IN (?)", players.empty? ? "" : players)}
+  scope :exclude, lambda {|players| where("id NOT IN (?)", players) unless players.empty?}
 end

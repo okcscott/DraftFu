@@ -1,7 +1,134 @@
+%input{type:"hidden", value:"#{@league.roster_spots}", id:"roster_spots"}
+%input{type:"hidden", value:"true", id:"draft_view"}
 %input{type:"hidden", value:"#{@league.id}", id:"league_id"}
-%input{type:"hidden", value:"", id:"round"}
-%input{type:"hidden", value:"", id:"pick"}
-%input{type:"hidden", value:"", id:"team_id"}
+#league_info
+  
 .row-fluid
-  #player_list.span7
-    .players
+  #round_info
+
+.row-fluid
+  #available_players.span6
+    %h2 Available Players
+    .filters
+      .positions
+        =link_to "All", "javascript:void(0)", class: "active"
+        =link_to "QB", "javascript:void(0)"
+        =link_to "RB", "javascript:void(0)"
+        =link_to "WR", "javascript:void(0)"
+        =link_to "TE", "javascript:void(0)"
+        =link_to "K", "javascript:void(0)"
+        =link_to "DEF", "javascript:void(0)"
+      %input{type: "text", class: "search-query player_search", placeholder: "search"}
+      =link_to "Search", "javascript:void(0)", class: "btn btn-info player_search_button"
+      .clear
+    #player_list      
+  .span1
+  #drafted_players.span5
+    #drafted_players_list
+
+#draft_confirm_modal.modal.hide
+  .modal-header
+    %button{type: "button", class: "close", data: {dismiss: "modal"}} x
+    %h3 You are about to draft:
+  .modal-body    
+    .player
+      %input{type: "hidden", class: "player_id", value: ""}
+      %img{ class: "profile_pic", src:""}
+      .info
+        .name
+        .team
+      .clear 
+  .modal-footer
+    .buttons
+      =link_to "Close", "javascript:void(0)", class: "btn", data: {dismiss: "modal"}
+      =link_to "Draft", "javascript:void(0)", class: "btn btn-success"
+    .message{style: "display:none;"}
+      %p Submitting your pick
+
+#draft_pick_made_modal.modal.hide
+  .modal-header
+    %button{type: "button", class: "close", data: {dismiss: "modal"}} x
+    %h3 A Pick Has Been Made!
+  .modal-body       
+       
+  .modal-footer
+
+
+%script#draft_pick_made_template{type:"template/html"}
+  <h2><%=team.name%> selects:</h2>
+  <div class="player">
+  <input type="hidden" class="player_id" value="<%=player.id%>" />
+  <img class="profile_pic" src=<%=player.image_url%> />
+  <div class="info">
+  <div class="name"><%=player.name%> - <%=player.position%> (<%=player.rank%>)</div>
+  <div class="team"><%=player.team%> (<%=player.bye_week%>)</div>
+  </div>
+  <div class="clear"></div>
+  </div>
+
+%script#player_template{type:"template/html"}
+  <input type="hidden" class="player_id" value="<%=id%>" />
+  <img class="profile_pic" src=<%=image_url%> />
+  <div class="info">
+  <div class="name"><%=name%> - <%=position%> (<%=rank%>)</div>
+  <div class="team"><%=team%> (<%=bye_week%>)</div>
+  </div>
+
+  <% if(this.draftable) { %>
+  <a href="javascript:void(0);" class="btn btn-success btn-large draft">Draft</a>
+  <% } %>
+  <% if(!isNaN(this.round)){ %>
+  <div class="round">
+  Round <%=this.round%>
+  </div>  
+  <% } %>   
+  <div class="clear"></div>
+%script#players_template{type:"template/html"}
+
+%script#drafted_player_template{type: "template/html"}
+  <img class="profile_pic" src=<%=image_url%> />
+  <div class="info">
+  <div class="name"><%=name%> - <%=position%> (<%=rank%>)</div>
+  <div class="team"><%=team%> (<%=bye_week%>)</div>
+  </div>
+  <div class="clear"></div>
+%script#undrafted_player_template{type: "template/html"}
+  <div>Round <%=round%></div>
+
+%script#round_info_template{type: "template/html"}
+  <div class="current_drafter">
+  Currently Drafting:
+  <span><%=team_name%></span>
+  </div>
+  <div class="current_round">
+  Round:
+  <span><%=round%></span>
+  </div>
+  <div class="current_pick">
+  Pick:
+  <span><%=pick%></span>
+  </div>
+  <div class="clear"></div>
+  <div class="draft_clock">
+  <span>2:00</span>
+  </div>
+
+%script#league_info_template{type: "template/html"}
+  <input type="hidden" value="<%=round%>" id="round" />
+  <input type="hidden" value="<%=pick%>" id="pick" />
+  <input type="hidden" value="<%=team_id%>" id="team_id" />
+  <input type="hidden" value="<%=team_id%>" id="current_team" />
+
+:javascript
+  jQuery(function() {
+    window.app.draftView = new window.app.DraftView({
+      model: app.LeagueInfo,
+      league_id: $("#league_id").val(),
+      roster_spots: $("#roster_spots").val()
+    });
+
+    window.app.LeagueInfo.fetch();
+  })
+
+
+
