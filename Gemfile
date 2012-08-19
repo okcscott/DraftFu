@@ -25,13 +25,14 @@ end
 
 group :test, :development do
   gem "rspec-rails", "~> 2.6"
+  gem "capybara"
+  gem 'capybara-webkit'
 end
 
 gem 'jquery-rails'
 gem "haml-rails"
 
-gem "capybara"
-gem 'capybara-webkit'
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
