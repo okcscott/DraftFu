@@ -59,6 +59,7 @@
   <div>Round <%=round%></div>
 
 %script#round_info_template{type: "template/html"}
+  <img src="https://s3.amazonaws.com/draftfu/<%=image%>" />
   <div class="current_drafter">
   Currently Drafting:
   <span><%=team_name%></span>
@@ -71,7 +72,12 @@
   Pick:
   <span><%=pick%></span>
   </div>
-  <div class="clear"></div>
+  <% if(pause) { %>
+  <a href="javascript:void(0);" class="btn btn-success btn-large resume">Start Draft</a>
+  <% } else { %>
+  <a href="javascript:void(0);" class="btn btn-warning btn-large pause">Pause Draft</a>
+  <% } %>
+  <div class="clear"></div>  
   <div class="draft_clock">
   <span>2:00</span>
   </div>
@@ -81,6 +87,7 @@
   <input type="hidden" value="<%=pick%>" id="pick" />
   <input type="hidden" value="<%=team_id%>" id="team_id" />
   <input type="hidden" value="<%=team_id%>" id="current_team" />
+  <input type="hidden" value="<%=pause%>"" id="pause" />
 
 %script#roster_template{type: "template/html"}
   <div class="roster_team">

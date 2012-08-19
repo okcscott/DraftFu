@@ -36,6 +36,8 @@ Draftfu::Application.routes.draw do
     get "leagues/start_draft" => "leagues#start_draft"
     get "leagues/picks_queue" => "leagues#picks_queue"
     post "leagues/missed_pick" => "leagues#missed_pick"
+    post "leagues/pause_draft" => "leagues#pause_draft"
+    post "leagues/resume_draft" => "leagues#resume_draft"
     get "teams/draft_picks" => "teams#draft_picks"
   end
 

@@ -3,7 +3,7 @@ class Api::LeaguesController < ApplicationController
   def current_pick
     @league = League.find(params[:league_id])
     current_pick = @league.current_pick
-    render json: {team_name: current_pick.team.name, team_id: current_pick.team.id, round: current_pick.round, pick: current_pick.pick, timestamp: current_pick.timestamp}
+    render json: {team_name: current_pick.team.name, team_id: current_pick.team.id, round: current_pick.round, pick: current_pick.pick, timestamp: current_pick.timestamp, pause: @league.pause, league_id: @league.id, image: current_pick.team.image}
   end
 
   def start_draft
@@ -65,6 +65,25 @@ class Api::LeaguesController < ApplicationController
 
 
     Pusher['draft'].trigger('pick_missed', {:message => {draftPick: @current_pick.to_json, team: @current_pick.team}})
+    render :nothing => true, :status => 200, :content_type => 'text/html'
+  end
+
+  def pause_draft
+    @league = League.find(params[:league_id])
+    @league.pause = true
+    @league.save
+    Pusher['draft'].trigger('pause', {})
+    render :nothing => true, :status => 200, :content_type => 'text/html'
+  end
+
+  def resume_draft
+    @league = League.find(params[:league_id])
+    @league.pause = false
+    current_pick = @league.current_pick
+    current_pick.timestamp = Time.now
+    current_pick.save
+    @league.save
+    Pusher['draft'].trigger('resume', {})
     render :nothing => true, :status => 200, :content_type => 'text/html'
   end
 end

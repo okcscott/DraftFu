@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120816033314) do
+ActiveRecord::Schema.define(:version => 20120819202415) do
 
   create_table "draft_picks", :force => true do |t|
     t.integer  "round"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20120816033314) do
     t.integer  "pick",            :default => 1
     t.integer  "round",           :default => 1
     t.string   "slug"
+    t.boolean  "pause",           :default => true
   end
 
   add_index "leagues", ["commissioner_id"], :name => "index_leagues_on_commissioner_id"
@@ -65,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20120816033314) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "pick"
+    t.string   "image"
   end
 
   add_index "teams", ["league_id"], :name => "index_teams_on_league_id"

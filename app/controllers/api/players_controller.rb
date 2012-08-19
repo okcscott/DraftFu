@@ -45,6 +45,11 @@ class Api::PlayersController < ApplicationController
     @player = Player.find(params[:player_id])
     @draftPick = @league.current_pick
 
+    if @league.pause
+      render json: "The draft is not active", status: :unprocessable_entity
+      return
+    end
+
     #make sure this is the current pick
     if(@draftPick.team_id == @team.id && @league.player_available(@player.id))
       @draftPick.player_id = @player.id

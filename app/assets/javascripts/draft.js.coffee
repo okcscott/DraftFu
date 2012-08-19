@@ -13,7 +13,7 @@ $(document).ready ->
     channel.bind 'pick_made', (data) ->  
       view = new window.app.PickMadeView
         model: jQuery.parseJSON(data.message.player)
-        team_name: jQuery.parseJSON(data.message.team).name 
+        team: jQuery.parseJSON(data.message.team)
       view.render()
       
       setTimeout (->
@@ -32,6 +32,14 @@ $(document).ready ->
       ), 3000
 
       app.LeagueInfo.fetch()
+
+    channel.bind 'pause', (data) -> 
+      app.LeagueInfo.fetch()
+      console.log "pause"
+
+    channel.bind 'resume', (data) -> 
+      app.LeagueInfo.fetch()
+      console.log "pause"
 
 
 

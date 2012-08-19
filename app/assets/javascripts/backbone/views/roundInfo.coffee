@@ -7,9 +7,23 @@ jQuery ->
     render: ->
       @timer.clear()
       $(@el).html @template(@model.toJSON())      
-      @timer.set({seconds: @timeRemaining()})    
-      @timer.start()
-      @
+      @timer.set({seconds: @timeRemaining()})
+
+      @timer.start() unless @model.toJSON().pause
+      @    
+    events:
+      'click .pause' : 'pause'
+      'click .resume' : 'resume'
+    pause: ->
+      $.ajax
+        type: "POST"
+        url: "/api/leagues/pause_draft"
+        data: {league_id: @model.toJSON().league_id}        
+    resume: ->
+      $.ajax
+        type: "POST"
+        url: "/api/leagues/resume_draft"
+        data: {league_id: @model.toJSON().league_id}        
     timeRemaining: ->
       roundStart = new Date(@model.get("timestamp"))
       roundEnd = new Date(@model.get("timestamp"))

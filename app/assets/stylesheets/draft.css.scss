@@ -91,18 +91,33 @@
   }
   #round_info {
     padding: 20px 0;
+    img {
+      height: 70px;
+      float: left;
+      margin-left: 20px;
+    }
     .current_drafter {
       margin-left: 20px;
+    }
+    .pause, .resume {
+      position: absolute;
+      right: 120px;
+      bottom: 35px;
     }
   }
 }
 
-#round_info {
+#round_info {  
   padding: 20px;
   color: #999;
   background-color: #333;
   font-size: 20px;
   position: relative;
+
+  img {
+    height: 70px;
+    float: left;
+  }
 
   span {
     color: #fff;
@@ -116,23 +131,32 @@
     right: 0;
     background-color: #d33;
     span {
-      margin-top: 20px;
+      margin-top: 45px;
       display: block;
       text-align: center;
     }
   }
 
+  .draft_status {
+    margin-top: 25px;
+    float: left;
+  }
+
   .current_drafter {
     float: left;
     margin-right: 20px;
+    margin-top: 25px;
+    margin-left: 20px;
   }
   .current_round {
     float: left;
     margin-right: 20px;
+    margin-top: 25px;
   }
   .current_pick {
     float: left;
     margin-right: 20px;
+    margin-top: 25px;
   }
 }
 .player {

@@ -1,4 +1,4 @@
-class Timer extends Backbone.Model
+class Timer extends Backbone.Model  
   initialize: (options) ->
     @control = options.control
     @league_id = options.league_id

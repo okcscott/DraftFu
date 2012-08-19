@@ -18,6 +18,8 @@ jQuery ->
 
       @model.bind "change", @render, @
       @leagueInfoView.bind "leagueInfoUpdated", @updateView, @
+    pause: ->
+      console.log "pause"
     updateView: (DraftBoardView) ->
       @roundInfoView.render()
       @rostersView.collection.fetch()
