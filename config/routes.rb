@@ -33,6 +33,10 @@ Draftfu::Application.routes.draw do
     get "players/drafted"
     post "players/draft"
     get "leagues/current_pick" => "leagues#current_pick"
+    get "leagues/start_draft" => "leagues#start_draft"
+    get "leagues/picks_queue" => "leagues#picks_queue"
+    post "leagues/missed_pick" => "leagues#missed_pick"
+    get "teams/draft_picks" => "teams#draft_picks"
   end
 
   # The priority is based upon order of creation:

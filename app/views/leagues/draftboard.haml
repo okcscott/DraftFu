@@ -3,47 +3,9 @@
 %input{type:"hidden", value:"#{@league.id}", id:"league_id"}
 #league_info
   
-.row-fluid
-  #round_info
-
-.row-fluid
-  #available_players.span6
-    %h2 Available Players
-    .filters
-      .positions
-        =link_to "All", "javascript:void(0)", class: "active"
-        =link_to "QB", "javascript:void(0)"
-        =link_to "RB", "javascript:void(0)"
-        =link_to "WR", "javascript:void(0)"
-        =link_to "TE", "javascript:void(0)"
-        =link_to "K", "javascript:void(0)"
-        =link_to "DEF", "javascript:void(0)"
-      %input{type: "text", class: "search-query player_search", placeholder: "search"}
-      =link_to "Search", "javascript:void(0)", class: "btn btn-info player_search_button"
-      .clear
-    #player_list      
-  .span1
-  #drafted_players.span5
-    #drafted_players_list
-
-#draft_confirm_modal.modal.hide
-  .modal-header
-    %button{type: "button", class: "close", data: {dismiss: "modal"}} x
-    %h3 You are about to draft:
-  .modal-body    
-    .player
-      %input{type: "hidden", class: "player_id", value: ""}
-      %img{ class: "profile_pic", src:""}
-      .info
-        .name
-        .team
-      .clear 
-  .modal-footer
-    .buttons
-      =link_to "Close", "javascript:void(0)", class: "btn", data: {dismiss: "modal"}
-      =link_to "Draft", "javascript:void(0)", class: "btn btn-success"
-    .message{style: "display:none;"}
-      %p Submitting your pick
+.draftboard
+  #round_info.row-fluid
+  #rosters.row-fluid
 
 #draft_pick_made_modal.modal.hide
   .modal-header
@@ -78,20 +40,11 @@
 
 %script#player_template{type:"template/html"}
   <input type="hidden" class="player_id" value="<%=id%>" />
-  <img class="profile_pic" src=<%=image_url%> />
-  <div class="info <%=position%>">
-  <div class="name"><%=name%> - <%=position%> (<%=rank%>)</div>
-  <div class="team"><%=team%> (<%=bye_week%>)</div>
+  <div class="info <%= position%>">
+  <div class="name"><%=name%></div>
   </div>
-
-  <% if(this.draftable) { %>
-  <a href="javascript:void(0);" class="btn btn-success btn-large draft">Draft</a>
-  <% } %>
-  <% if(!isNaN(this.round)){ %>
-  <div class="round">
-  Round <%=this.round%>
-  </div>  
-  <% } %>   
+  <div class="position"><%=position%></div>
+  <div class="bye_week"><%=bye_week%></div>
   <div class="clear"></div>
 %script#players_template{type:"template/html"}
 
@@ -129,9 +82,14 @@
   <input type="hidden" value="<%=team_id%>" id="team_id" />
   <input type="hidden" value="<%=team_id%>" id="current_team" />
 
+%script#roster_template{type: "template/html"}
+  <div class="roster_team">
+  <h4><%=team.name%></h4>
+  </div>
+
 :javascript
   jQuery(function() {
-    window.app.draftView = new window.app.DraftView({
+    window.app.draftBoardView = new window.app.DraftBoardView({
       model: app.LeagueInfo,
       league_id: $("#league_id").val(),
       roster_spots: $("#roster_spots").val()

@@ -1,4 +1,12 @@
 class Timer extends Backbone.Model
+  initialize: (options) ->
+    @control = options.control
+    @league_id = options.league_id
+  missedPick: ->
+    $.ajax
+      type: "POST"
+      url: "/api/leagues/missed_pick"
+      data: {league_id: @league_id}        
   convertTimeToSeconds : (time) ->
     minutes = parseInt(time.split(":")[0], 10)
     seconds = parseInt(time.split(":")[1], 10)
@@ -7,6 +15,8 @@ class Timer extends Backbone.Model
     seconds = @convertTimeToSeconds($(".draft_clock span").text())
     if seconds <= 0
       window.clearInterval @get("timerId")
+      if @control
+        @missedPick()
       return
     seconds -= 1
     time = Math.floor(seconds / 60) + ":" + (seconds % 60).toFixed().pad(2, "0")

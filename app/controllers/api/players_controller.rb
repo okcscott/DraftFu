@@ -48,9 +48,13 @@ class Api::PlayersController < ApplicationController
     #make sure this is the current pick
     if(@draftPick.team_id == @team.id && @league.player_available(@player.id))
       @draftPick.player_id = @player.id
+      @draftPick.missed = false
       if @draftPick.save
-        @league.move_to_the_next_pick.save
-        @league.current_pick
+        @league.move_to_the_next_pick
+        next_pick = @league.current_pick
+        next_pick.timestamp = Time.now
+        next_pick.save
+        @league.save
         Pusher['draft'].trigger('pick_made', {:message => {draftPick: @draftPick.to_json, player: @player.to_json, team: @team.to_json}})
         render json: @draftPick
       else

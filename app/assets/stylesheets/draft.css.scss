@@ -5,6 +5,98 @@
   clear: both;
 }
 
+.draftboard {
+
+  // #round_info {
+  //   padding: 20px 0;
+  //   color: #999;
+  //   background-color: #333;
+  //   font-size: 20px;
+  //   position: fixed;
+  //   z-index: 99;
+  //   .current_drafter {      
+  //     margin-left: 20px;
+  //   }
+  // }
+  // #rosters {    
+  //   padding-top: 80px;
+  //   .roster_team {
+  //     position: fixed;
+  //     z-index: 99;
+  //     padding: 5px;
+  //     background-color: #F59C0D;
+  //     width: 14%;
+  //     h4 {
+  //       font-size: 20px;
+  //       color: #fff;
+  //     }
+  //   }
+  // }
+  .roster_team {
+    text-align:center;
+  }
+  .roster {
+    margin-top: 20px;
+  }
+  .players {
+    padding-top: 10px;
+    .player {
+      position: relative;
+      margin-bottom: 10px;
+      img {
+        width: 25px;
+      }
+      .info {
+        width: 140px;
+        margin-left: 0px;
+        .name {
+          margin-bottom: 0;
+          width: 140px;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+      .bye_week {
+        position: absolute;
+        right: 5px;
+        bottom: 2px;
+        color: #999;        
+      }
+      .position {
+        position: absolute;
+        right: 5px;
+        top: 2px;
+        color: #999;
+      }
+    }
+  }
+  .undrafted {
+    padding: 10px;
+    font-size: 13px;
+    border: none;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    &.active {
+      background-color: #ccc;
+      color: #fff;
+    }
+    &.active.current {
+      background-color: #FBF7D9;
+      color: #C09853;
+    }
+    &.missed {
+      background: #F2DEDE;
+      color: #B94A48;
+    }
+  }
+  #round_info {
+    padding: 20px 0;
+    .current_drafter {
+      margin-left: 20px;
+    }
+  }
+}
+
 #round_info {
   padding: 20px;
   color: #999;

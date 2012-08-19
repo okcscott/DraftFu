@@ -4,7 +4,7 @@ jQuery ->
     template: _.template($('#player_template').html())
     initialize: ->
     render: ->
-      @$('.player').html @template(@model.toJSON())      
+      @$('.player').html @template(@model)      
       $(@el).modal()
       @
     events:

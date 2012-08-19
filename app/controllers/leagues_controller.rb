@@ -41,4 +41,8 @@ class LeaguesController < ApplicationController
     @current_pick = @league.current_pick
   end
 
+  def draftboard
+    @league = League.find(params[:id])
+    @current_pick = @league.current_pick
+  end
 end

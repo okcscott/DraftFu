@@ -1,7 +1,7 @@
 class League < ActiveRecord::Base
   belongs_to :commissioner, :class_name => "User"
   has_many :teams, order: "pick ASC"
-  has_many :draftPicks, through: :teams
+  has_many :draftPicks, autosave: true
   has_many :players, through: :draftPicks
   
   validates_presence_of :name
@@ -10,12 +10,30 @@ class League < ActiveRecord::Base
     player_ids = self.players.map(&:id)
     Player.exclude(player_ids)
   end
+
+  def missed_picks
+    self.draftPicks.missed
+  end
+
+  def available_picks
+    self.draftPicks.available
+  end
+
+  def next_pick
+    available_picks.first
+  end
+
+  def move_to_pick(draft_pick)
+    self.round = draft_pick.round
+    self.pick = draft_pick.pick
+    self
+  end
   
   def current_pick
     #check the leagues current round and pick
     #if there is no draft pick for that slot
     #create one (new pick) otherwise, return it
-    self.draftPicks.where(round: self.round, pick: self.pick).first || current_team.draftPicks.create(round: self.round, pick: self.pick, timestamp: Time.now)
+    self.draftPicks.where(round: self.round, pick: self.pick).first
   end
   
   def current_team
@@ -24,13 +42,8 @@ class League < ActiveRecord::Base
   end
   
   def move_to_the_next_pick
-    #check if it is the end of the round
-    if self.pick == teams.count
-      self.round += 1
-      self.pick = 1
-    else
-      self.pick += 1
-    end
+    self.move_to_pick(self.next_pick)
+    self.current_pick.timestamp = Time.now
     self
   end
 

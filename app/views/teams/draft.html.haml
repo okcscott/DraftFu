@@ -55,6 +55,16 @@
        
   .modal-footer
 
+#draft_pick_missed_modal.modal.hide
+  .modal-header
+    %button{type: "button", class: "close", data: {dismiss: "modal"}} x
+    %h3 A Pick Has Been Missed!
+  .modal-body       
+       
+  .modal-footer
+
+%script#draft_pick_missed_template{type:"template/html"}
+  <h2><%=team.name%> missed their pick. What a maroon!</h2>
 
 %script#draft_pick_made_template{type:"template/html"}
   <h2><%=team.name%> selects:</h2>

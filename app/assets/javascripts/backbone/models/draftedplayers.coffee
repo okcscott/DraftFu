@@ -6,6 +6,8 @@ class DraftedPlayers extends Backbone.Collection
     "/api/players/drafted.json?team_id=#{$('#team_id').val()}"
 jQuery ->
   @app = window.app ? {}
-  @app.DraftedPlayers = new DraftedPlayers([],
+  @app.DraftedPlayers = DraftedPlayers
+
+  @app.draftedPlayers = new DraftedPlayers([],
     team_id : $('#team_id').val()
   )

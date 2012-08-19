@@ -9,7 +9,7 @@ jQuery ->
       @draftable = @options.draftable
       @round = @options.round
     render: ->
-      $(@el).html @template(@model.toJSON())
+      $(@el).html @template(@model)
       @
     events:
       'click .draft' : 'draft'
@@ -24,8 +24,14 @@ jQuery ->
     template: _.template($('#undrafted_player_template').html())
     initialize: ->
       @round = @options.round
+      @active = @options.active      
+      @current = @options.current
+      @missed = @options.missed
     render: ->
       $(@el).html @template({round: @round})
+      $(@el).addClass('active') if @active
+      $(@el).addClass('current') if @current
+      $(@el).addClass('missed') if @missed
       @
 
   class PlayersView extends Backbone.View
@@ -39,7 +45,7 @@ jQuery ->
       $('#player_list').empty()
       for player in @collection.models
         view = new PlayerView 
-          model: player,
+          model: player.toJSON(),
           team_id: @team_id,
           league_id: @league_id,
           draftable: @isDraftable()
@@ -92,3 +98,5 @@ jQuery ->
   @app = window.app ? {}
   @app.PlayersView = PlayersView
   @app.DraftedPlayersView = DraftedPlayersView  
+  @app.UndraftedPlayerView = UndraftedPlayerView
+  @app.PlayerView = PlayerView

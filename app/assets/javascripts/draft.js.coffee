@@ -22,5 +22,16 @@ $(document).ready ->
 
       app.LeagueInfo.fetch()
 
+    channel.bind 'pick_missed', (data) -> 
+      view = new window.app.PickMissedView
+        team_name: data.message.team.name 
+      view.render()
+      
+      setTimeout (->
+        view.hide()
+      ), 3000
+
+      app.LeagueInfo.fetch()
+
 
 
