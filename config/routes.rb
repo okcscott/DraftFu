@@ -21,6 +21,7 @@ Draftfu::Application.routes.draw do
     get 'draft', on: :member
     resources :teams do
       get 'draft', on: :member
+      get 'draftboard', on: :member
     end
   end
   resources :players

@@ -1,0 +1,21 @@
+-current_round = @league.round
+-current_pick = @league.pick
+.draftboard
+  #rosters.row-fluid{style: "width: 2800px;"}
+    -@teams.each do |team|
+      .roster{style:"float:left; width:200px; margin-right: 20px;"}
+        .roster_team
+          %h4=team.name
+          .players
+            -team.draftPicks.each do |draft_pick|
+              -if draft_pick.player_id.nil?
+                %div{class: "undrafted #{(draft_pick.round == current_round && draft_pick.pick == current_pick) ? "current active" : ""}"}
+                  Round
+                  =draft_pick.round
+              -else
+                .player
+                  %div{class: "info #{draft_pick.player.position}"}
+                    .name=draft_pick.player.name
+                  .position=draft_pick.player.position
+                  .bye_week=draft_pick.player.bye_week
+                  .clear
