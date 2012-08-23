@@ -33,16 +33,17 @@ class Api::LeaguesController < ApplicationController
   end
 
   def picks_queue
-    number_of_picks = params[:number_of_picks] || 6
+    number_of_picks = params[:number_of_picks] || 4
     @league = League.find(params[:league_id])
 
     @draft_picks = DraftPick.where(league_id: @league.id, player_id: nil).limit(number_of_picks)
-    # @last_pick = DraftPick.where("league_id = ? and player_id is not NULL", @league.id).last
+    @last_picks = DraftPick.unscoped.where("league_id = ? and player_id is not NULL", @league.id).order("updated_at DESC").limit(2)
     
     # picks = [@last_pick]
     # picks = picks + @draft_picks
+    picks = @last_picks.reverse + @draft_picks
 
-    render json: @draft_picks, include: :team
+    render json: picks, include: :team
   end
 
   def missed_pick

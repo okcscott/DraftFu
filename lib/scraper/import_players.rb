@@ -40,10 +40,9 @@ module ImportPlayers
           rank = player_row.find(:css, ".stat").text
           player = Player.new(name: player_name, yahooid: yahoo_id, position: position, rank: rank, team: team)
           player.save
-          i = i+1
         end 
         
-        if has_css?(".pagingnavlist .last a") && i < 500
+        if has_css?(".pagingnavlist .last a")
           puts "Going to next page"
           click_link("Next 25")
           sleep(2)
@@ -137,6 +136,7 @@ module ImportPlayers
 
     def get_images
       Player.where(:image_url => nil).each do |player|
+        puts "#{player.name} : #{player.yahooid}"
         visit("http://sports.yahoo.com/nfl/players/#{player.yahooid}")
         player_image = find(".nfl-player-nav img")[:src]
         temp_image = player_image.split("/http:")
@@ -152,5 +152,5 @@ module ImportPlayers
   end
 end
 
-# spider = ImportPlayers::Yahoo.new
-# spider.get_results
+spider = ImportPlayers::Yahoo.new
+spider.get_images

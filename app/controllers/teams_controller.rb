@@ -1,4 +1,16 @@
 class TeamsController < ApplicationController
+  before_filter :validates_manager
+
+  def validates_manager
+    league = League.find(params[:league_id])
+    team = Team.find(params[:id])
+    if !team.nil?
+      if current_user.id != league.commissioner_id && team.user_id != current_user.id
+        redirect_to root_url, :alert => "First login to access this page."
+      end
+    end
+  end
+
   def new
     @league = League.find(params[:league_id])
     @team = @league.teams.new

@@ -67,7 +67,7 @@
   <h2><%=team.name%> missed their pick. What a maroon!</h2>
 
 %script#draft_pick_made_template{type:"template/html"}
-  <h2><%=team.name%> selects:</h2>
+  <h2><img src="https://s3.amazonaws.com/draftfu/<%=team.image%>" height="100px"/> <%=team.name%> selects:</h2>
   <div class="player">
   <input type="hidden" class="player_id" value="<%=player.id%>" />
   <img class="profile_pic" src=<%=player.image_url%> />
@@ -133,6 +133,11 @@
   <input type="hidden" value="<%=round%>" id="round" />
   <input type="hidden" value="<%=pick%>" id="pick" />
   <input type="hidden" value="<%=team_id%>" id="current_team" />
+
+<audio>
+<source src="/sportscenter.mp3"></source>
+Your browser isn't invited for super fun audio time.
+</audio>
 
 :javascript
   jQuery(function() {

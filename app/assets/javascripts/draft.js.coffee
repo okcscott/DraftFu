@@ -8,6 +8,10 @@ $(document).ready ->
   pusher = new Pusher($('meta[name="pusher-key"]').attr('content'))
   channel = pusher.subscribe('draft')
 
+  playMusic = ->
+    if $('audio').length > 0
+      $('audio')[0].play()
+
   if $('#draft_view').val()
 
     channel.bind 'pick_made', (data) ->  
@@ -15,10 +19,12 @@ $(document).ready ->
         model: jQuery.parseJSON(data.message.player)
         team: jQuery.parseJSON(data.message.team)
       view.render()
+
+      playMusic()
       
       setTimeout (->
         view.hide()
-      ), 3000
+      ), 6000
 
       app.LeagueInfo.fetch()
 
@@ -31,15 +37,17 @@ $(document).ready ->
         view.hide()
       ), 3000
 
+      playMusic()
+
       app.LeagueInfo.fetch()
 
     channel.bind 'pause', (data) -> 
       app.LeagueInfo.fetch()
-      console.log "pause"
+      playMusic()
 
     channel.bind 'resume', (data) -> 
       app.LeagueInfo.fetch()
-      console.log "pause"
+      playMusic()
 
 
 

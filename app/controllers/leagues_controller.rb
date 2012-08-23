@@ -1,4 +1,14 @@
 class LeaguesController < ApplicationController
+  before_filter :validate_commissioner
+
+  def validate_commissioner
+    league = League.find(params[:id])
+    if !league.nil?
+      if current_user.id != league.commissioner_id
+        redirect_to root_url, :alert => "First login to access this page."
+      end
+    end
+  end
   
   def index
     @leagues = current_user.leagues
