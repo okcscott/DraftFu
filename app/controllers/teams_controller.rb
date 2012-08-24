@@ -47,7 +47,7 @@ class TeamsController < ApplicationController
   end
 
   def draftboard
-    @teams = Team.where(league_id: params[:league_id])
+    @teams = Team.where(league_id: params[:league_id]).order("pick ASC")
     @league = League.find(params[:league_id])
   end
 
