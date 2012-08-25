@@ -5,6 +5,25 @@
   clear: both;
 }
 
+.stats {
+  margin-left: 20px;
+  float: left;
+  background: #292929;
+  padding: 8px 20px;
+  border-radius: 10px;
+  box-shadow: inset 0px 1px 1px black, 0px 1px 1px #666;
+  .stat {
+    font-size: 15px;
+  }
+}
+
+#round_info img.trophy, .draftboard #round_info img.trophy {
+  height: 30px;
+  position: relative;
+  top: 20px;
+  margin-left: 10px;
+}
+
 .draftboard {
 
   // #round_info {
@@ -97,7 +116,6 @@
       margin-left: 20px;
     }
     .current_drafter {
-      margin-left: 20px;
     }
     .pause, .resume {
       position: absolute;
@@ -142,21 +160,20 @@
     float: left;
   }
 
-  .current_drafter {
+  .draft_info {
     float: left;
-    margin-right: 20px;
-    margin-top: 25px;
     margin-left: 20px;
-  }
-  .current_round {
-    float: left;
-    margin-right: 20px;
-    margin-top: 25px;
-  }
-  .current_pick {
-    float: left;
-    margin-right: 20px;
-    margin-top: 25px;
+    margin-top: 10px;
+    .current_drafter {
+      margin-bottom: 10px;
+    }
+    .current_round {
+      float: left;
+    }
+    .current_pick {
+      float: left;
+      margin-left: 10px;
+    }
   }
 }
 .player {
