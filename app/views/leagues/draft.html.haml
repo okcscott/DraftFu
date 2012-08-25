@@ -108,12 +108,14 @@
 
 %script#round_info_template{type: "template/html"}
   <img src="https://s3.amazonaws.com/draftfu/<%=image%>" />
+  <% ships = parseInt(championships);
+  for(i=0; i<ships; i++) {%>
   =image_tag "trophy.png", class: "trophy"
-  =image_tag "trophy.png", class: "trophy"
+  <% } %>
   <div class="stats">
-  <div class="stat">Winning %: <span>0.695</span></div>
-  <div class="stat">Championships: <span>2</span></div>
-  <div class="stat">Average Finish: <span>5</span></div>
+  <div class="stat">Winning %: <span><%= win_pct %></span></div>
+  <div class="stat">Championships: <span><%= championships %></span></div>
+  <div class="stat">Average Finish: <span><%= avg_place %></span></div>
   </div>
   <div class="draft_info">
   <div class="current_drafter">
