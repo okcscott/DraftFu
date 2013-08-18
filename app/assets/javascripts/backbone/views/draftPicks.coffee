@@ -1,4 +1,4 @@
-class DraftPicksView extends Backbone.View
+class DraftFu.Views.DraftPicksView extends Backbone.View
   el: "#drafted_players_list"
   initialize: ->
     @collection.bind 'reset', @render, @
@@ -7,7 +7,7 @@ class DraftPicksView extends Backbone.View
     for draftPick in @collection.models
       draftPickJSON = draftPick.toJSON()
       if draftPickJSON.player_id?
-        view = new app.PlayerView 
+        view = new DraftFu.Views.PlayerView 
           model: draftPickJSON.player,
           team_id: null,
           league_id: null,
@@ -15,9 +15,6 @@ class DraftPicksView extends Backbone.View
           round: draftPickJSON.round
         $(@el).append view.render().el
       else    
-        view = new app.UndraftedPlayerView
+        view = new DraftFu.Views.UndraftedPlayerView
           round: draftPickJSON.round
         $(@el).append view.render().el
-
-@app = window.app ? {}
-@app.DraftPicksView = DraftPicksView  

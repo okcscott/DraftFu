@@ -77,23 +77,6 @@
   <div class="clear"></div>
   </div>
 
-%script#player_template{type:"template/html"}
-  <input type="hidden" class="player_id" value="<%=id%>" />
-  <img class="profile_pic" src=<%=image_url%> />
-  <div class="info <%=position%>">
-  <div class="name"><%=name%> - <%=position%> (<%=rank%>)</div>
-  <div class="team"><%=team%> (<%=bye_week%>)</div>
-  </div>
-
-  <% if(this.draftable) { %>
-  <a href="javascript:void(0);" class="btn btn-success btn-large draft">Draft</a>
-  <% } %>
-  <% if(!isNaN(this.round)){ %>
-  <div class="round">
-  Round <%=this.round%>
-  </div>  
-  <% } %>   
-  <div class="clear"></div>
 %script#players_template{type:"template/html"}
 
 %script#drafted_player_template{type: "template/html"}
@@ -147,7 +130,7 @@
 
 :javascript
   jQuery(function() {
-    window.app.draftView = new window.app.DraftView({
+    window.app.draftView = new DraftFu.Views.DraftView({
       model: app.LeagueInfo,
       league_id: $("#league_id").val(),
       roster_spots: $("#roster_spots").val()

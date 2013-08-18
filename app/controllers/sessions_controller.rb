@@ -18,4 +18,8 @@ class SessionsController < ApplicationController
     logout
     redirect_to root_url, :notice => "Logged out!"
   end
+
+  def oauth
+    raise request.env["omniauth.auth"].to_yaml
+  end
 end

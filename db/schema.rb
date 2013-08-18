@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120824045603) do
+ActiveRecord::Schema.define(:version => 20130814183818) do
 
   create_table "draft_picks", :force => true do |t|
     t.integer  "round"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20120824045603) do
     t.datetime "timestamp"
     t.boolean  "missed",     :default => false
     t.integer  "league_id"
+    t.decimal  "adpd"
   end
 
   add_index "draft_picks", ["player_id"], :name => "index_draft_picks_on_player_id"
@@ -58,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20120824045603) do
     t.integer  "bye_week"
     t.string   "team"
     t.string   "image_url"
+    t.decimal  "adp"
   end
 
   create_table "teams", :force => true do |t|

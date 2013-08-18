@@ -12,6 +12,8 @@
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink
+//= require backbone/draftfu
+//= require_tree ../templates
 //= require backbone/models/player
 //= require backbone/models/players
 //= require backbone/models/draftedplayers
@@ -32,4 +34,4 @@
 //= require backbone/views/pickMissed
 //= require backbone/views/draftBoardView
 //= require backbone/views/rosters
-//= require backbone/draftfu
+

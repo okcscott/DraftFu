@@ -1,7 +1,7 @@
 jQuery ->
   class PickMadeView extends Backbone.View
     el: "#draft_pick_made_modal"
-    template: _.template($('#draft_pick_made_template').html())
+    template: JST["draft_pick_made"]
     initialize: ->
       @team = @options.team
     hide: ->

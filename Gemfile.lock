@@ -60,6 +60,11 @@ GEM
     compass-rails (1.0.0.rc.3)
       compass (~> 0.12.rc.0)
     diff-lcs (1.1.3)
+    eco (1.0.0)
+      coffee-script
+      eco-source
+      execjs
+    eco-source (1.1.0.rc.1)
     ejs (1.0.0)
     erubis (2.7.0)
     execjs (1.3.0)
@@ -82,7 +87,11 @@ GEM
       activesupport (~> 3.0)
       haml (~> 3.0)
       railties (~> 3.0)
+    hashie (2.0.5)
     hike (1.2.1)
+    httparty (0.11.0)
+      multi_json (~> 1.0)
+      multi_xml (>= 0.5.2)
     i18n (0.6.0)
     jquery-rails (1.0.19)
       railties (~> 3.0)
@@ -95,6 +104,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.17.2)
     multi_json (1.1.0)
+    multi_xml (0.5.5)
     multipart-post (1.1.5)
     nokogiri (1.5.0)
     oauth (0.4.5)
@@ -198,10 +208,13 @@ DEPENDENCIES
   coffee-rails (~> 3.1.1)
   compass (~> 0.12.alpha.2)
   compass-rails
+  eco
   factory_girl_rails (~> 3.0)
   forgery (= 0.5.0)
   haml
   haml-rails
+  hashie
+  httparty
   jquery-rails
   pg
   pusher

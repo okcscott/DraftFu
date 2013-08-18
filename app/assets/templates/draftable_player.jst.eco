@@ -1,0 +1,14 @@
+<input type="hidden" class="player_id" value="<%=@id%>" />
+<div class="info <%=@position%>">
+<div class="name"><%=@name%> - <%=@position%></div>
+<div class="team"><%=@team%> (<%=@bye_week%>)</div>
+</div>
+<% if(@draftable): %>
+<a href="javascript:void(0);" class="btn btn-success btn-large draft">Draft</a>
+<% end %>
+<% if(!isNaN(@round)) : %>
+<div class="round">
+Round <%=@round%>
+</div>  
+<% end %>   
+<div class="clear"></div>

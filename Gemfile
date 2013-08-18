@@ -11,6 +11,9 @@ gem 'pg'
 gem 'rest-client'
 gem 'rails-backbone'
 gem 'pusher'
+gem 'httparty'
+gem 'hashie'
+gem 'eco'
 
 # Gems used only for assets and not required
 # in production environments by default.

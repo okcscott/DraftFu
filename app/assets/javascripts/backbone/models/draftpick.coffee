@@ -1,4 +1,1 @@
-class DraftPick extends Backbone.Model
-
-@app = window.app ? {}
-@app.DraftPick = DraftPick
+class DraftFu.Models.DraftPick extends Backbone.Model

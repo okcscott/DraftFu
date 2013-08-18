@@ -1,0 +1,103 @@
+teams:
+ -
+  name: "FA*"
+  bye_week: 0
+ -
+  name: "PIT"
+  bye_week: 5
+ -
+  name: "IND"
+  bye_week: 8
+ -
+  name: "BAL"
+  bye_week: 8
+ -
+  name: "FA"
+  bye_week: 0
+ -
+  name: "NYG"
+  bye_week: 9
+ -
+  name: "WAS"
+  bye_week: 5
+ -
+  name: "CHI"
+  bye_week: 8
+ -
+  name: "NYJ"
+  bye_week: 10
+ -
+  name: "NOS"
+  bye_week: 7
+ -
+  name: "TEN"
+  bye_week: 8
+ -
+  name: "DET"
+  bye_week: 9
+ -
+  name: "SFO"
+  bye_week: 9
+ -
+  name: "NEP"
+  bye_week: 10
+ -
+  name: "HOU"
+  bye_week: 8
+ -
+  name: "CAR"
+  bye_week: 4
+ -
+  name: "KCC"
+  bye_week: 10
+ -
+  name: "SDC"
+  bye_week: 8
+ -
+  name: "CLE"
+  bye_week: 10
+ -
+  name: "CIN"
+  bye_week: 12
+ -
+  name: "DAL"
+  bye_week: 11
+ -
+  name: "TBB"
+  bye_week: 5
+ -
+  name: "MIN"
+  bye_week: 5
+ -
+  name: "OAK"
+  bye_week: 7
+ -
+  name: "ATL"
+  bye_week: 6
+ -
+  name: "ARI"
+  bye_week: 9
+ -
+  name: "DEN"
+  bye_week: 9
+ -
+  name: "PHI"
+  bye_week: 12
+ -
+  name: "GBP"
+  bye_week: 4
+ -
+  name: "STL"
+  bye_week: 11
+ -
+  name: "SEA"
+  bye_week: 12
+ -
+  name: "BUF"
+  bye_week: 12
+ -
+  name: "JAC"
+  bye_week: 9
+ -
+  name: "MIA"
+  bye_week: 6

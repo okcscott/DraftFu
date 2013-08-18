@@ -54,10 +54,15 @@ class Api::PlayersController < ApplicationController
     if(@draftPick.team_id == @team.id && @league.player_available(@player.id))
       @draftPick.player_id = @player.id
       @draftPick.missed = false
+
+      #determine ADPD
+      pick_number = (((@draftPick.round-1)*@league.teams.count) + @draftPick.pick)
+      @draftPick.adpd = @player.adp - pick_number
+
       if @draftPick.save
         @league.move_to_the_next_pick
         next_pick = @league.current_pick
-        next_pick.timestamp = Time.now
+        next_pick.timestamp = Time.now + 2.seconds
         next_pick.save
         @league.save
         Pusher['draft'].trigger('pick_made', {:message => {draftPick: @draftPick.to_json, player: @player.to_json, team: @team.to_json}})

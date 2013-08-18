@@ -3,7 +3,7 @@ class Api::LeaguesController < ApplicationController
   def current_pick
     @league = League.find(params[:league_id])
     current_pick = @league.current_pick
-    render json: {team_name: current_pick.team.name, team_id: current_pick.team.id, round: current_pick.round, pick: current_pick.pick, timestamp: current_pick.timestamp, pause: @league.pause, league_id: @league.id, image: current_pick.team.image, win_pct: current_pick.team.win_pct, championships: current_pick.team.championships, avg_place: current_pick.team.avg_place}
+    render json: {team_name: current_pick.team.name, team_id: current_pick.team.id, round: current_pick.round, pick: current_pick.pick, timestamp: current_pick.timestamp.to_i, pause: @league.pause, league_id: @league.id, image: current_pick.team.image, win_pct: current_pick.team.win_pct, championships: current_pick.team.championships, avg_place: current_pick.team.avg_place}
   end
 
   def start_draft
@@ -59,7 +59,7 @@ class Api::LeaguesController < ApplicationController
       next_pick = @league.available_picks.second
     end
 
-    next_pick.timestamp = Time.now
+    next_pick.timestamp = Time.now + 2.seconds
     @league.move_to_pick(next_pick)
     @league.save
     next_pick.save
@@ -81,7 +81,7 @@ class Api::LeaguesController < ApplicationController
     @league = League.find(params[:league_id])
     @league.pause = false
     current_pick = @league.current_pick
-    current_pick.timestamp = Time.now
+    current_pick.timestamp = Time.now + 2.seconds
     current_pick.save
     @league.save
     Pusher['draft'].trigger('resume', {})

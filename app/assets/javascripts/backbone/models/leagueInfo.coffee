@@ -1,4 +1,5 @@
 class LeagueInfo extends Backbone.Model
+  initialize: ->
   url: ->
     "/api/leagues/current_pick.json?league_id=#{@get('league_id')}"
 jQuery ->

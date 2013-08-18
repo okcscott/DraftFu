@@ -1,18 +1,18 @@
-class Timer extends Backbone.Model  
+class DraftFu.Timer extends Backbone.Model  
   initialize: (options) ->
     @control = options.control
     @league_id = options.league_id
   missedPick: ->
-    $.ajax
-      type: "POST"
-      url: "/api/leagues/missed_pick"
-      data: {league_id: @league_id}        
+    # $.ajax
+    #   type: "POST"
+    #   url: "/api/leagues/missed_pick"
+    #   data: {league_id: @league_id}        
   convertTimeToSeconds : (time) ->
     minutes = parseInt(time.split(":")[0], 10)
     seconds = parseInt(time.split(":")[1], 10)
     (minutes * 60) + seconds
   timerUpdate : ->
-    seconds = @convertTimeToSeconds($(".draft_clock span").text())
+    seconds = Math.ceil((@get("endTimestamp") - (new Date()).getTime())/1000)
     if seconds <= 0
       window.clearInterval @get("timerId")
       if @control
@@ -28,7 +28,7 @@ class Timer extends Backbone.Model
     timer = @
     timerId = window.setInterval(->
         timer.timerUpdate()
-      , 1000)
+      , 500)
     @set({timerId : timerId})
   clear: ->
     timer = @
@@ -37,17 +37,14 @@ class Timer extends Backbone.Model
     @clear()
     @start()
   start : ->
-    time = Math.floor(@get("seconds") / 60) + ":" + (@get("seconds") % 60).toFixed().pad(2, "0")
-    $(".draft_clock span").text(time)
+    # time = Math.floor(@get("seconds") / 60) + ":" + (@get("seconds") % 60).toFixed().pad(2, "0")
+    # $(".draft_clock span").text(time)
+    $(".draft_clock span").text("2:00")
     timer = @
     timerId = window.setInterval(->
       timer.timerUpdate()
-    , 1000)
+    , 500)
     @set({timerId: timerId})
   initialize = ->    
   String::pad = (l, s) ->
     (if (l -= @length) > 0 then (s = new Array(Math.ceil(l / s.length) + 1).join(s)).substr(0, s.length) + this + s.substr(0, l - s.length) else this)
-
-jQuery ->
-  @app = window.app ? {}
-  @app.Timer = Timer

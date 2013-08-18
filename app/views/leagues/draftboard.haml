@@ -23,92 +23,6 @@
        
   .modal-footer
 
-%script#draft_pick_missed_template{type:"template/html"}
-  <h2><%=team.name%> missed their pick. What a maroon!</h2>
-
-%script#draft_pick_made_template{type:"template/html"}
-  <h2><img src="https://s3.amazonaws.com/draftfu/<%=team.image%>" height="100px"/> <%=team.name%> selects:</h2>
-  <div class="player">
-  <input type="hidden" class="player_id" value="<%=player.id%>" />
-  <img class="profile_pic" src=<%=player.image_url%> />
-  <div class="info">
-  <div class="name"><%=player.name%> - <%=player.position%> (<%=player.rank%>)</div>
-  <div class="team"><%=player.team%> (<%=player.bye_week%>)</div>
-  </div>
-  <div class="clear"></div>
-  </div>
-
-%script#player_template{type:"template/html"}
-  <input type="hidden" class="player_id" value="<%=id%>" />
-  <div class="info <%= position%>">
-  <div class="name"><%=name%></div>
-  </div>
-  <div class="position"><%=position%></div>
-  <div class="bye_week"><%=bye_week%></div>
-  <div class="clear"></div>
-%script#players_template{type:"template/html"}
-
-%script#drafted_player_template{type: "template/html"}
-  <img class="profile_pic" src=<%=image_url%> />
-  <div class="info">
-  <div class="name"><%=name%> - <%=position%> (<%=rank%>)</div>
-  <div class="team"><%=team%> (<%=bye_week%>)</div>
-  </div>
-  <div class="clear"></div>
-%script#undrafted_player_template{type: "template/html"}
-  <div>Round <%=round%></div>
-
-%script#round_info_template{type: "template/html"}
-  <img src="https://s3.amazonaws.com/draftfu/<%=image%>" />
-  <% ships = parseInt(championships);
-  for(i=0; i<ships; i++) {%>
-  =image_tag "trophy.png", class: "trophy"
-  <% } %>
-  <div class="stats">
-  <div class="stat">Winning %: <span><%= win_pct %></span></div>
-  <div class="stat">Championships: <span><%= championships %></span></div>
-  <div class="stat">Average Finish: <span><%= avg_place %></span></div>
-  </div>
-  <div class="draft_info">
-  <div class="current_drafter">
-  Currently Drafting:
-  <span><%=team_name%></span>
-  </div>
-  <div class="current_round">
-  Round:
-  <span><%=round%></span>
-  </div>
-  <div class="current_pick">
-  Pick:
-  <span><%=pick%></span>
-  </div>  
-  </div>
-  <% if(pause) { %>
-  <a href="javascript:void(0);" class="btn btn-success btn-large resume">Start Draft</a>
-  <% } else { %>
-  <a href="javascript:void(0);" class="btn btn-warning btn-large pause">Pause Draft</a>
-  <% } %>
-  <div class="clear"></div>  
-  <div class="draft_clock">
-  <span>2:00</span>
-  </div>
-
-%script#league_info_template{type: "template/html"}
-  <input type="hidden" value="<%=round%>" id="round" />
-  <input type="hidden" value="<%=pick%>" id="pick" />
-  <input type="hidden" value="<%=team_id%>" id="team_id" />
-  <input type="hidden" value="<%=team_id%>" id="current_team" />
-  <input type="hidden" value="<%=pause%>"" id="pause" />
-
-%script#roster_template{type: "template/html"}
-  <div class="roster_team">
-  <h4><%=team.name%></h4>
-  <div>
-  <span>Round <%=round%></span>
-  <span>Pick <%=pick%></span>
-  </div>
-  </div>
-
 <audio>
 <source src="/sportscenter.mp3"></source>
 Your browser isn't invited for super fun audio time.
@@ -116,7 +30,7 @@ Your browser isn't invited for super fun audio time.
 
 :javascript
   jQuery(function() {
-    window.app.draftBoardView = new window.app.DraftBoardView({
+    window.app.draftBoardView = new DraftFu.Views.DraftBoardView({
       model: app.LeagueInfo,
       league_id: $("#league_id").val(),
       roster_spots: $("#roster_spots").val()

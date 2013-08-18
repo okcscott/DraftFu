@@ -1,0 +1,7 @@
+<input type="hidden" class="player_id" value="<%=@id%>" />
+<div class="info <%=@position%>">
+<div class="name"><%=@name%></div>
+</div>
+<div class="position"><%=@position%></div>
+<div class="bye_week"><%=@bye_week%></div>
+<div class="clear"></div>

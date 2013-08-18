@@ -1,4 +1,1 @@
-class Roster extends Backbone.Model
-
-@app = window.app ? {}
-@app.Roster = Roster
+class DraftFu.Models.Roster extends Backbone.Model

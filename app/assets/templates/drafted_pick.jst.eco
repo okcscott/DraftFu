@@ -1,0 +1,6 @@
+  <img class="profile_pic" src=<%=image_url%> />
+  <div class="info">
+  <div class="name"><%=name%> - <%=position%> (<%=rank%>)</div>
+  <div class="team"><%=team%> (<%=bye_week%>)</div>
+  </div>
+  <div class="clear"></div>

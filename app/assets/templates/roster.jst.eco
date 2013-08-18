@@ -1,0 +1,7 @@
+<div class="roster_team">
+<h4><%=@team.name%></h4>
+<div>
+<span>Round <%=@round%></span>
+<span>Pick <%=@pick%></span>
+</div>
+</div>
