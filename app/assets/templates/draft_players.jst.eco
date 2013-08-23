@@ -1,0 +1,65 @@
+<div class="row-fluid">
+  <div class="span6 available_players_wrapper">
+    <h2>Available Players</h2>
+    <div class="filters">
+      <div class="positions">
+        <span class="active" data-position="">All</span>
+        <span data-position="QB">QB</span>
+        <span data-position="RB">RB</span>
+        <span data-position="WR">WR</span>
+        <span data-position="TE">TE</span>
+        <span data-position="PK">K</span>
+        <span data-position="DEF">DEF</span>
+        <div class="clear"></div>
+      </div>
+      <input type="text" class="search-query player_search", placeholder: "search" />
+      <div class="clear"></div>
+    </div>
+    <div id="available_players">
+    </div>
+  </div>
+  <div class="span6 roster_wrapper">
+    <h2>My Roster</h2>
+    <div id="my_roster">
+      <% for draftPick in @current_pick.team.draftPicks: %>
+        <% if draftPick.player_id is null: %>
+          <div class="empty_pick">
+            Round <%= draftPick.round %>
+          </div>
+        <% else: %>
+          <div class="chosen_pick <%= draftPick.player.position %>">
+            <span class="name"><%= draftPick.player.name %></span>
+            <span class="position"><%= draftPick.player.position %></span>
+            <span class="bye_week"><%= draftPick.player.bye_week %></span>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div id="scrolling_draft_board">
+  <div class="control inactive">Show/Hide Draftboard</div>
+  <div class="table_wrapper">  
+  </div>
+</div>
+<div class="modal hide fade confirmModal">
+  <div class="modal-body">
+    <h4>You are about to draft</h4>
+    <h2 class="player"></p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+    <a href="#" class="btn btn-primary">Yes, I'm Sure</a>
+  </div>
+</div>
+<div class="modal hide fade submittingModal">
+  <div class="modal-body">
+    <p>Submitting Your Pick...</p>
+  </div>
+</div>
+<div class="modal hide fade errorModal">
+  <div class="modal-body">
+    <p class="error">There was an error making your pick. Time to panic!</p>
+    <p class="reason"></p>
+  </div>
+</div>

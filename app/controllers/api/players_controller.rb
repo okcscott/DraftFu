@@ -11,11 +11,9 @@ class Api::PlayersController < ApplicationController
     limit = params[:count] || 10
     name = params[:name]
     position = params[:position]
-    #get the ID's of selected players
-    player_ids = @league.players.map(&:id)
 
     #get the rest of them    
-    player_scope = Player.exclude(player_ids).limit(limit)
+    player_scope = Player.available_for_league(params[:league_id]).limit(limit)
 
     if name
       player_scope = player_scope.where("(LOWER(players.name) LIKE ?)", "%#{name.downcase}%")
@@ -65,7 +63,7 @@ class Api::PlayersController < ApplicationController
         next_pick.timestamp = Time.now + 2.seconds
         next_pick.save
         @league.save
-        Pusher['draft'].trigger('pick_made', {:message => {draftPick: @draftPick.to_json, player: @player.to_json, team: @team.to_json}})
+        Pusher['draft'].trigger('pick_made', {draftPick: @draftPick.to_json(:include => [:player, :team])})
         render json: @draftPick
       else
         render json: @draftPick.errors, status: :unprocessable_entity

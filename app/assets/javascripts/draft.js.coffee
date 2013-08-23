@@ -8,46 +8,42 @@ $(document).ready ->
   pusher = new Pusher($('meta[name="pusher-key"]').attr('content'))
   channel = pusher.subscribe('draft')
 
+  DraftFu.Mediator = new Mediator()
+
   playMusic = ->
     if $('audio').length > 0
       $('audio')[0].play()
 
-  if $('#draft_view').val()
+  channel.bind 'pick_made', (data) ->
+    DraftFu.Mediator.publish("pick:made", jQuery.parseJSON(data.draftPick))
 
-    channel.bind 'pick_made', (data) ->  
-      view = new window.app.PickMadeView
-        model: jQuery.parseJSON(data.message.player)
-        team: jQuery.parseJSON(data.message.team)
-      view.render()
+  channel.bind 'pick_missed', (data) -> 
+    DraftFu.Mediator.publish("pick:missed")
 
-      playMusic()
-      
-      setTimeout (->
-        view.hide()
-      ), 6000
+  channel.bind 'pause', (data) -> 
+    DraftFu.Mediator.publish("draft:pause")
 
-      app.LeagueInfo.fetch()
+  channel.bind 'resume', (data) -> 
+    DraftFu.Mediator.publish("draft:resume", jQuery.parseJSON(data.currentPick))
 
-    channel.bind 'pick_missed', (data) -> 
-      view = new window.app.PickMissedView
-        team_name: data.message.team.name 
-      view.render()
-      
-      setTimeout (->
-        view.hide()
-      ), 3000
+  # if $('#draft_view').val()
 
-      playMusic()
+    # channel.bind 'pick_made', (data) ->  
 
-      app.LeagueInfo.fetch()
+    #   DraftFu.Mediator.publish("pick:made", data)
 
-    channel.bind 'pause', (data) -> 
-      app.LeagueInfo.fetch()
-      playMusic()
+      # view = new window.app.PickMadeView
+      #   model: jQuery.parseJSON(data.message.player)
+      #   team: jQuery.parseJSON(data.message.team)
+      # view.render()
 
-    channel.bind 'resume', (data) -> 
-      app.LeagueInfo.fetch()
-      playMusic()
+      # playMusic()
+
+      # app.LeagueInfo.fetch()
+
+    
+
+
 
 
 

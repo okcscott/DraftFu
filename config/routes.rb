@@ -19,6 +19,7 @@ Draftfu::Application.routes.draw do
   resources :leagues do
     get 'draftboard', on: :member
     get 'draft', on: :member
+    get 'team_draft', on: :member
     resources :teams do
       get 'draft', on: :member
       get 'draftboard', on: :member
@@ -34,6 +35,7 @@ Draftfu::Application.routes.draw do
     get "players/drafted"
     post "players/draft"
     get "leagues/current_pick" => "leagues#current_pick"
+    get "leagues/draft_info" => "leagues#draft_info"
     get "leagues/start_draft" => "leagues#start_draft"
     get "leagues/picks_queue" => "leagues#picks_queue"
     post "leagues/missed_pick" => "leagues#missed_pick"

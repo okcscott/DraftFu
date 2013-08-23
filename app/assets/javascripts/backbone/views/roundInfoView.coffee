@@ -1,17 +1,12 @@
 class DraftFu.Views.RoundInfoView extends Backbone.View
   el: "#round_info"
   template: JST["round_info"]
-  initialize: ->
-    @timer = @options.timer
+  initialize: (current_pick, future_picks)->
+    @current_pick = current_pick
+    @future_picks = future_picks
   render: ->
-    @timer.clear()
-    $(@el).html @template(@model.toJSON())
-    @setTimer()
-    @timer.start() unless @model.toJSON().pause
+    $(@el).html @template(@)
     @    
-  events:
-    'click .pause' : 'pause'
-    'click .resume' : 'resume'
   pause: ->
     $.ajax
       type: "POST"
@@ -32,3 +27,8 @@ class DraftFu.Views.RoundInfoView extends Backbone.View
     roundEnd.setMinutes(roundEnd.getMinutes() + 2)
     now = new Date()
     String(Math.max(0,(roundEnd.getTime() - now.getTime())/1000))
+
+  update: (current_pick, future_picks) ->
+    @current_pick = current_pick
+    @future_picks = future_picks
+    @render()

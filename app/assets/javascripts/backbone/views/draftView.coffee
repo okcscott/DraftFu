@@ -11,9 +11,6 @@ class DraftFu.Views.DraftView extends Backbone.View
       collection: new DraftFu.Collections.DraftPicks([],
         team_id: @options.team_id
       )
-    # @draftedPlayersView = new app.DraftedPlayersView
-    #   collection: app.draftedPlayers
-    #   roster_spots: @options.roster_spots
     @roundInfoView = new DraftFu.Views.RoundInfoView
       model: @model
       timer: new DraftFu.Timer

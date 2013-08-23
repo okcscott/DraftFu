@@ -6,32 +6,16 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require mediator
 //= require draft
 //= require bootstrap-modal
+//= require teamDraft
+//= require draftboard
 //= require underscore
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/draftfu
 //= require_tree ../templates
-//= require backbone/models/player
-//= require backbone/models/players
-//= require backbone/models/draftedplayers
-//= require backbone/models/draftpick
-//= require backbone/models/draftPicks
-//= require backbone/models/timer
-//= require backbone/models/leagueInfo
-//= require backbone/models/roster
-//= require backbone/models/rosters
-//= require backbone/views/players
-//= require backbone/views/roundInfo
-//= require backbone/views/confirmPick
-//= require backbone/views/leagueInfo
-//= require backbone/views/draftView
-//= require backbone/views/draftPicks
-//= require backbone/views/draftboardDraftPicks
-//= require backbone/views/pickMade
-//= require backbone/views/pickMissed
-//= require backbone/views/draftBoardView
-//= require backbone/views/rosters
-
+//= require_tree ./backbone/models
+//= require_tree ./backbone/views

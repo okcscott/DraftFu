@@ -1,33 +1,25 @@
-<img src="https://s3.amazonaws.com/draftfu/<%=@image%>" />
-
-<div class="stats">
-<div class="stat">Winning %: <span><%=@win_pct %></span></div>
-<div class="stat">Championships: <span><%=@championships %></span></div>
-<div class="stat">Average Finish: <span><%=@avg_place %></span></div>
-</div>
-
-<div class="draft_info">
-<div class="current_drafter">
-Currently Drafting:
-<span><%=@team_name%></span>
-</div>
-<div class="current_round">
-Round:
-<span><%=@round%></span>
-</div>
-
 <div class="current_pick">
-Pick:
-<span><%=@pick%></span>
-</div>  
+  <img src="https://s3.amazonaws.com/draftfu/<%=@current_pick.team.image%>" />
 
+  <div class="stats">
+    <div class="stat">Winning %: <span><%=@current_pick.team.win_pct %></span></div>
+    <div class="stat">Championships: <span><%=@current_pick.team.championships %></span></div>
+    <div class="stat">Average Finish: <span><%=@current_pick.team.avg_place %></span></div>
+  </div>
+  <div class="clear"></div>
 </div>
-<% if(@pause): %>
-<a href="javascript:void(0);" class="btn btn-success btn-large resume">Start Draft</a>
-<% else: %>
-<a href="javascript:void(0);" class="btn btn-warning btn-large pause">Pause Draft</a>
-<% end %>
-<div class="clear"></div>  
-<div class="draft_clock">
-<span>2:00</span>
+
+<div class="future_picks hidden-phone">
+  <div class="table_wrapper">
+    <table>
+      <tr>
+        <% for pick in @future_picks: %>
+          <td>
+            <img src="https://s3.amazonaws.com/draftfu/<%=pick.team.image%>" />
+          </td>
+        <% end %>
+      </tr>
+    </table>
+  </div>
 </div>
+<div class="clear"></div>

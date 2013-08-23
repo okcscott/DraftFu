@@ -1,0 +1,23 @@
+<% for roster in @rosters.models: %>
+  <div class="roster">
+    <div class="roster_team grade <%= roster.grade() %>">
+      <h4><%= roster.get("name") %></h4>
+    </div>
+    <div class="players">
+      <% for draftPick in roster.get("draftPicks"): %>
+        <% if draftPick.player_id? : %>
+          <div class="player grade <%= @grade(draftPick) %>">
+            <div class="info <%= draftPick.player.position %>">
+              <div class="name"><%= draftPick.player.name %></div>
+            </div>
+            <div class="position"><%= draftPick.player.position %></div>
+            <div class="bye_week"><%= draftPick.player.bye_week %></div>
+            <div class="clear"></div>
+          </div>
+        <% else : %>
+          <div class="undrafted <%= @isActive(draftPick) %> <%= @isMissed(draftPick) %>">Round <%= draftPick.round %></div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

@@ -12,7 +12,7 @@ class DraftFu.Views.RosterView extends Backbone.View
       round: @model.toJSON().round
     $(@el).append draftPicksView.render().el
     @
-class DraftFu.Views.RostersView extends Backbone.View
+class DraftFu.Views.RostersViewOld extends Backbone.View
   el: '#rosters'
   initialize: (options) ->
     @collection.bind "reset", @render, @

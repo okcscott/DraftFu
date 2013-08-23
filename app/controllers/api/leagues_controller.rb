@@ -6,6 +6,15 @@ class Api::LeaguesController < ApplicationController
     render json: {team_name: current_pick.team.name, team_id: current_pick.team.id, round: current_pick.round, pick: current_pick.pick, timestamp: current_pick.timestamp.to_i, pause: @league.pause, league_id: @league.id, image: current_pick.team.image, win_pct: current_pick.team.win_pct, championships: current_pick.team.championships, avg_place: current_pick.team.avg_place}
   end
 
+  def draft_info
+    @league = League.find(params[:id])
+    @current_pick = @league.current_pick
+    @upcoming_picks = DraftPick.where("league_id = ? AND player_id is NULL AND id != ?", params[:id], @current_pick.id).limit(9).order("round desc, pick desc")
+    @available_players = Player.available_for_league(params[:id]).limit(10)
+    @rosters = Team.where(league_id: params[:id]).order(:pick)
+    render json: {league: @league.to_json, current_pick: @current_pick.to_json(:include => {:team => {:include => {:draftPicks => {:include => :player}}}}), future_picks: @upcoming_picks.to_json(:include => :team), available_players: @available_players.to_json, rosters: @rosters.to_json(:include => {:draftPicks => {:include => :player }})}
+  end
+
   def start_draft
     @league = League.find(params[:league_id])
     @teams = Team.where(league_id: params[:league_id]).order(:pick)
@@ -84,7 +93,7 @@ class Api::LeaguesController < ApplicationController
     current_pick.timestamp = Time.now + 2.seconds
     current_pick.save
     @league.save
-    Pusher['draft'].trigger('resume', {})
+    Pusher['draft'].trigger('resume', {currentPick: current_pick.to_json})
     render :nothing => true, :status => 200, :content_type => 'text/html'
   end
 end

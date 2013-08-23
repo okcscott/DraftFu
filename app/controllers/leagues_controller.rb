@@ -1,5 +1,5 @@
 class LeaguesController < ApplicationController
-  before_filter :validate_commissioner
+  # before_filter :validate_commissioner
 
   def validate_commissioner
     league = League.find(params[:id])
@@ -54,5 +54,15 @@ class LeaguesController < ApplicationController
   def draftboard
     @league = League.find(params[:id])
     @current_pick = @league.current_pick
+    @rosters = Team.where(league_id: params[:id]).order(:pick) 
+    @upcoming_picks = DraftPick.where("league_id = ? AND player_id is NULL AND id != ?", params[:id], @current_pick.id).limit(9).order("round desc, pick desc")
+  end
+
+  def team_draft
+    @league = League.find(params[:id])
+    @current_pick = @league.current_pick
+    @upcoming_picks = DraftPick.where("league_id = ? AND player_id is NULL AND id != ?", params[:id], @current_pick.id).limit(9).order("round desc, pick desc")
+    @available_players = Player.available_for_league(params[:id]).limit(10)
+    @rosters = Team.where(league_id: params[:id]).order(:pick) 
   end
 end

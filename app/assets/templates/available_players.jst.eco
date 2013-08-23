@@ -1,0 +1,8 @@
+<% for player in @availablePlayers: %>
+  <div class="available_player <%= player.position %> <%= if @currentTeam then "draftable" else "undraftable" %>" data-id="<%= player.id %>" data-name="<%= player.name %>"  >
+    <span class="name"><%= player.name %></span>
+    <span class="team"><%= player.team %></span>
+    <span class="position"><%= player.position %></span>
+    <span class="bye_week"><%= player.bye_week %></span>
+  </div>
+<% end %>

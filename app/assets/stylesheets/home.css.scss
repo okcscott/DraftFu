@@ -1,11 +1,5 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-@import "bootstrap/bootstrap";
-@import "bootstrap/responsive";
-
-#player_list
-  .player {
-    padding: 10px;
-    font-size: 18px;
-  }
+@import "bootstrap";
+@import "bootstrap-responsive";

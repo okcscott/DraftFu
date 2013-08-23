@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <% for roster in @rosters: %>
+    <td>
+       <h2><%= roster.name %></h2>
+       <ul>
+        <% for draftPick in roster.draftPicks: %>
+          <% if draftPick.player_id is null: %>
+            <li>Round <%= draftPick.round %></li>
+          <% else: %>
+            <li><%= draftPick.player.name %></li>
+          <% end %>
+        <% end %>
+       </ul>
+    </td>
+    <% end %>
+  </tr>
+</table>

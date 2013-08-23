@@ -2,11 +2,11 @@
 namespace :my_fantasy_league do
   desc "Import players from MyFantasyLeague"
   task :import_players => :environment do
-		valid_positions = ["DEF","QB","RB","WR","TE","K"]
+		valid_positions = ["Def","QB","RB","WR","TE","PK"]
 		response = HTTParty.get("http://football.myfantasyleague.com/2013/export?TYPE=players&L=&W=&JSON=1")
 		response["players"]["player"].each do |player|
 			if (valid_positions.include? player["position"]) and (!Player.exists?(yahooid: player["id"]))
-				Player.create(name: player["name"], yahooid: player["id"], team: player["team"], position: player["position"])
+				Player.create(name: player["name"], yahooid: player["id"], team: player["team"], position: player["position"].upcase)
 			end
 		end
   end
@@ -27,5 +27,18 @@ namespace :my_fantasy_league do
 			Player.where(team: team.name).update_all(bye_week: team.bye_week)
 		end
   end
-  
+
+  desc "Convert Names to a more Readable Name"
+  task :convert_names => :environment do
+    Player.all.each do |player|
+      names = player.name.gsub(" ","").split(",")
+      player.name = "#{names[1]} #{names[0]}"
+      player.save
+    end
+  end  
+
+  desc "Remove Aaron Hernandez"
+  task :remove_players => :environment do
+    Player.find_by_yahooid("9830").delete
+  end
 end
