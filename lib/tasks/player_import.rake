@@ -31,8 +31,8 @@ namespace :my_fantasy_league do
   desc "Convert Names to a more Readable Name"
   task :convert_names => :environment do
     Player.all.each do |player|
-      names = player.name.gsub(" ","").split(",")
-      player.name = "#{names[1]} #{names[0]}"
+      names = player.name.split(",")
+      player.name = "#{names[1]} #{names[0].gsub(" ","")}"
       player.save
     end
   end  

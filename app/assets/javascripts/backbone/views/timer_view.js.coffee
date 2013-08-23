@@ -26,7 +26,7 @@ class DraftFu.Views.TimerView extends Backbone.View
 
     #conver the pick start to a timestamp
     roundEnd = new Date(timestamp)
-    roundEnd.setMinutes(roundEnd.getMinutes() + 1)
+    roundEnd.setMinutes(roundEnd.getMinutes() + 2)
     @endTimestamp = roundEnd.getTime()
 
     #create the timer and save its id to clear later
