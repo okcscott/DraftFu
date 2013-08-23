@@ -6,9 +6,9 @@
        <ul>
         <% for draftPick in roster.draftPicks: %>
           <% if draftPick.player_id is null: %>
-            <li>Round <%= draftPick.round %></li>
+            <!-- <li class="undrafted">Round <%= draftPick.round %></li> -->
           <% else: %>
-            <li><%= draftPick.player.name %></li>
+            <li class="drafted"><%= draftPick.player.name %></li>
           <% end %>
         <% end %>
        </ul>

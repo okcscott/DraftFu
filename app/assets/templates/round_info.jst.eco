@@ -1,4 +1,7 @@
 <div class="current_pick">
+  <div class="info">
+    <b><%= @current_pick.team.name %></b> Round <%=@current_pick.round %> Pick <%=@current_pick.pick %>
+  </div>
   <img src="https://s3.amazonaws.com/draftfu/<%=@current_pick.team.image%>" />
 
   <div class="stats">
@@ -9,17 +12,13 @@
   <div class="clear"></div>
 </div>
 
-<div class="future_picks hidden-phone">
-  <div class="table_wrapper">
-    <table>
-      <tr>
-        <% for pick in @future_picks: %>
-          <td>
-            <img src="https://s3.amazonaws.com/draftfu/<%=pick.team.image%>" />
-          </td>
-        <% end %>
-      </tr>
-    </table>
-  </div>
+<div class="future_picks visible-desktop">
+  <% for pick in @future_picks: %>
+    <div class="future_pick">
+      <img src="https://s3.amazonaws.com/draftfu/<%=pick.team.image%>" />
+      <span>R<%= pick.round %>P<%= pick.pick %></span>
+    </div>
+  <% end %>
+  <div class="clear"></div>
 </div>
 <div class="clear"></div>

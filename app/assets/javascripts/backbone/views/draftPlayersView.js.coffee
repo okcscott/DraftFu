@@ -22,7 +22,7 @@ class DraftFu.Views.DraftPlayersView extends Backbone.View
     'click #players_nav span' : 'switch_view'
     'click .filters span' : 'filter_click'
     "keyup .filters input" : "filter"
-    "click #scrolling_draft_board" : "draftboard_click"
+    "click #scrolling_draft_board .control" : "draftboard_click"
     "click .available_player.draftable" : "confirmPick"
     "click .confirmModal .btn-primary" : "makePick"
 
@@ -100,7 +100,7 @@ class DraftFu.Views.DraftPlayersView extends Backbone.View
       position: @position_filter
       name: @$el.find('.player_search').val()
     , (data) ->
-      self.$el.find("#available_players").html self.availablePlayersView.render(data)
+      self.$el.find("#available_players").html self.availablePlayersView.render(data, self.currentTeam())
 
   switch_view: (e) ->
     nav_control = $(e.currentTarget)

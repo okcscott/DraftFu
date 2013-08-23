@@ -125,7 +125,7 @@
         &.RB .name { color: #FA6900 }
         &.WR .name { color: #00A0B0 }
         &.TE .name { color: #CC333F }
-        &.K .name { color: #F56991 }
+        &.PK .name { color: #F56991 }
       }
 
       .bye_week {
@@ -174,15 +174,40 @@
 
   .current_pick {
     float: left;
-    padding: 20px 0;
-    width: 30%;
+    padding: 10px 0 10px 10px;
+    background: #000;
+
+    .info {
+      margin-bottom: 10px;
+      text-align: center;
+      color: #fff;
+    }
   }
 
   .future_picks {
-    float: right;
-    padding: 20px 0;
+    float: left;
+    padding: 20px 0 0;
     width: 70%;
     overflow-x: scroll;
+    margin-left: 40px;
+
+    .future_pick {
+      float: left;
+      margin-right: 10px;
+
+      img {
+        display: block;
+        margin-bottom: 5px;
+      }
+      span {
+        display: block;
+        text-align: center;
+        font-weight: normal;
+        font-size: 15px;
+        margin-top: 5px;
+        color: #999;
+      }
+    }
 
     .table_wrapper {
       width: 830px;
@@ -253,12 +278,9 @@
   }
 
   .stats {
-    margin-left: 20px;
     float: left;
-    background: #292929;
     padding: 8px 20px;
     border-radius: 10px;
-    box-shadow: inset 0px 1px 1px black, 0px 1px 1px #666;
     .stat {
       font-size: 15px;
     }
@@ -358,6 +380,7 @@
     left: 0;
     right: 0;
     padding-top: 30px;
+    z-index: 100;
 
     .control {
       float: right;

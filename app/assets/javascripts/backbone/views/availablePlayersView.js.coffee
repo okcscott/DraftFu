@@ -4,5 +4,4 @@ class DraftFu.Views.AvailablePlayersView extends Backbone.View
   initialize: ->
 
   render: (availablePlayers, currentTeam) ->
-    console.log currentTeam
     @template(availablePlayers: availablePlayers, currentTeam: currentTeam)

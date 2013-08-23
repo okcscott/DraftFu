@@ -3,7 +3,6 @@ window.TeamDraft =
     @league = league
     @current_pick = current_pick
     @team = team
-    console.log team
 
     TeamDraft.timerView = new DraftFu.Views.TimerView()
     TeamDraft.timerView.render()
