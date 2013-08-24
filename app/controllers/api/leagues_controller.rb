@@ -12,7 +12,11 @@ class Api::LeaguesController < ApplicationController
     @upcoming_picks = DraftPick.where("league_id = ? AND player_id is NULL AND id != ?", params[:id], @current_pick.id).limit(9).order("round desc, pick desc")
     @available_players = Player.available_for_league(params[:id]).limit(10)
     @rosters = Team.where(league_id: params[:id]).order(:pick)
-    render json: {league: @league.to_json, current_pick: @current_pick.to_json(:include => {:team => {:include => {:draftPicks => {:include => :player}}}}), future_picks: @upcoming_picks.to_json(:include => :team), available_players: @available_players.to_json, rosters: @rosters.to_json(:include => {:draftPicks => {:include => :player }})}
+    @team = []
+    if params[:team_id]
+      @team = Team.find(params[:team_id])
+    end
+    render json: {league: @league.to_json, current_pick: @current_pick.to_json(:include => {:team => {:include => {:draftPicks => {:include => :player}}}}), future_picks: @upcoming_picks.to_json(:include => :team), available_players: @available_players.to_json, rosters: @rosters.to_json(:include => {:draftPicks => {:include => :player }}), team: @team.to_json(:include => {:draftPicks => {:include => :player}})}
   end
 
   def start_draft

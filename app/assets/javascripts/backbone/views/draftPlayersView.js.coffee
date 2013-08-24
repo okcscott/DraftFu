@@ -26,12 +26,13 @@ class DraftFu.Views.DraftPlayersView extends Backbone.View
     "click .available_player.draftable" : "confirmPick"
     "click .confirmModal .btn-primary" : "makePick"
 
-  update: (current_pick, available_players, league, rosters)->
+  update: (current_pick, available_players, league, rosters, team)->
     @current_pick = current_pick
     @available_players = available_players
     @league = league
     @rosters = rosters
     @position_filter = ""
+    @team = team if @team?
     @render()
 
   currentTeam: ->

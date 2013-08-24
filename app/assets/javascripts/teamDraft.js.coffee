@@ -17,9 +17,19 @@ window.TeamDraft =
     DraftFu.Mediator.subscribe("draft:pause", @pauseDraft, {}, @)
     DraftFu.Mediator.subscribe("pick:made", @draftPickMade, {}, @)
     DraftFu.Mediator.subscribe("pick:missed", @draftPickMissed, {}, @)
+    DraftFu.Mediator.subscribe("draft:end", @draftEnd, {}, @)
 
     unless league.pause
       TeamDraft.timerView.start(@current_pick.timestamp)
+
+  draftEnd: ->
+    TeamDraft.playersView.hideModals()
+    $('.draftEnd').modal()
+    TeamDraft.timerView.pause()
+
+    setTimeout (->
+        $('.draftEnd').modal("hide")
+      ), 2000
 
   pauseDraft: ->
     TeamDraft.timerView.pause()
@@ -65,8 +75,17 @@ window.TeamDraft =
 
     #update data
     self = @
+
+    if @team?
+      data = 
+        id: @league.id
+        team_id: @team.id
+    else
+      data =
+        id: @league.id
+
     $.getJSON "/api/leagues/draft_info.json",
-      id: @league.id
+      data
     , (data) ->
       
       #set objects
@@ -74,7 +93,10 @@ window.TeamDraft =
       @current_pick = jQuery.parseJSON(data.current_pick)
       future_picks = jQuery.parseJSON(data.future_picks)
       available_players = jQuery.parseJSON(data.available_players)
-      rosters = jQuery.parseJSON(data.rosters)     
+      rosters = jQuery.parseJSON(data.rosters)
+      team = jQuery.parseJSON(data.team)
+      
+      console.log data   
 
       #update timer
       TeamDraft.timerView.start(@current_pick.timestamp)
@@ -83,7 +105,7 @@ window.TeamDraft =
       TeamDraft.roundInfoView.update(@current_pick, future_picks)
 
       #update players view
-      TeamDraft.playersView.update(@current_pick, available_players, @league, rosters)
+      TeamDraft.playersView.update(@current_pick, available_players, @league, rosters, team)
 
 
 

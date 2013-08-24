@@ -16,15 +16,24 @@ $(document).ready ->
 
   channel.bind 'pick_made', (data) ->
     DraftFu.Mediator.publish("pick:made", jQuery.parseJSON(data.draftPick))
+    playMusic()
 
   channel.bind 'pick_missed', (data) -> 
     DraftFu.Mediator.publish("pick:missed")
+    playMusic()
 
   channel.bind 'pause', (data) -> 
     DraftFu.Mediator.publish("draft:pause")
+    playMusic()
 
   channel.bind 'resume', (data) -> 
     DraftFu.Mediator.publish("draft:resume", jQuery.parseJSON(data.currentPick))
+    playMusic()
+
+  channel.bind 'end_draft', (data) -> 
+    console.log "draft is over"
+    DraftFu.Mediator.publish("draft:end")
+    playMusic()
 
   # if $('#draft_view').val()
 

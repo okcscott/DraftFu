@@ -58,13 +58,21 @@ class Api::PlayersController < ApplicationController
       @draftPick.adpd = @player.adp - pick_number
 
       if @draftPick.save
-        @league.move_to_the_next_pick
-        next_pick = @league.current_pick
-        next_pick.timestamp = Time.now + 2.seconds
-        next_pick.save
-        @league.save
-        Pusher['draft'].trigger('pick_made', {draftPick: @draftPick.to_json(:include => [:player, :team])})
-        render json: @draftPick
+        if DraftPick.where("league_id = ? AND player_id is NULL", @league.id).count > 0
+          @league.move_to_the_next_pick
+          next_pick = @league.current_pick
+          next_pick.timestamp = Time.now + 2.seconds
+          next_pick.save
+          @league.save
+          Pusher['draft'].trigger('pick_made', {draftPick: @draftPick.to_json(:include => [:player, :team])})
+          render json: @draftPick
+        else
+          #THE DRAFT IS OVER!!
+          @league.pause = true
+          @league.save
+          Pusher['draft'].trigger("end_draft", {})
+          render :nothing => true, :status => 200, :content_type => 'text/html'
+        end
       else
         render json: @draftPick.errors, status: :unprocessable_entity
       end

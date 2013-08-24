@@ -21,7 +21,8 @@
   <div class="span6 roster_wrapper">
     <h2>My Roster</h2>
     <div id="my_roster">
-      <% for draftPick in @current_pick.team.draftPicks: %>
+      <% console.log @team %>
+      <% for draftPick in (if @team? then @team.draftPicks else @current_pick.team.draftPicks): %>
         <% if draftPick.player_id is null: %>
           <div class="empty_pick">
             Round <%= draftPick.round %>

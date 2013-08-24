@@ -18,9 +18,17 @@ window.Draftboard =
     DraftFu.Mediator.subscribe("draft:pause", @pauseDraft, {}, @)
     DraftFu.Mediator.subscribe("pick:made", @draftPickMade, {}, @)
     DraftFu.Mediator.subscribe("pick:missed", @draftPickMissed, {}, @)
+    DraftFu.Mediator.subscribe("draft:end", @draftEnd, {}, @)
 
     unless @league.pause
       Draftboard.timerView.start(current_pick.timestamp)
+  draftEnd: ->
+    $('.draftEnd').modal()
+    Draftboard.timerView.pause()
+
+    setTimeout (->
+        $('.draftEnd').modal("hide")
+      ), 2000
 
   showPickModal: (current_pick) ->
     $('.pickMadeModal .team_name').html(current_pick.team.name)

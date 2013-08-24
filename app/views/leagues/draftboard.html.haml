@@ -16,6 +16,15 @@
       %span.team_name
       %span missed their picked
 
+.modal.hide.fade.draftEnd
+  .modal-body
+    %h2 The draft has ended.
+
+<audio>
+<source src="/sportscenter.mp3"></source>
+Your browser isn't invited for super fun audio time.
+</audio>
+
 :javascript
   jQuery(function() {
     Draftboard.init(#{@league.to_json}, #{@current_pick.to_json(:include => {:team => {:include => {:draftPicks => {:include => :player}}}})}, #{@upcoming_picks.to_json(:include => :team)}, #{@rosters.to_json(:include => {:draftPicks => {:include => :player }})});
