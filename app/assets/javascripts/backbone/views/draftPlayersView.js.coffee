@@ -8,6 +8,8 @@ class DraftFu.Views.DraftPlayersView extends Backbone.View
     @league = league
     @rosters = rosters
     @team = team
+    @static_roster = @team?
+    console.log @static_roster
     @position_filter = ""
 
     @availablePlayersView = new DraftFu.Views.AvailablePlayersView()
@@ -32,7 +34,7 @@ class DraftFu.Views.DraftPlayersView extends Backbone.View
     @league = league
     @rosters = rosters
     @position_filter = ""
-    @team = team if @team?
+    @team = team if (@static_roster and (team.id is @team.id))
     @render()
 
   currentTeam: ->

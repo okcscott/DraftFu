@@ -6,6 +6,10 @@
   text-align: center;
 }
 
+html {
+  background-color: #DFDFDF;
+}
+
 #timer {
   width: 100%;
   text-align: center;
@@ -36,8 +40,17 @@
 
 #draftboard {
   background-color: #DFDFDF;
-  width: 1920px;
-  height: 1080px;
+  // 1080p
+  // width: 1920px;
+  // height: 1080px;
+  width: 1280px;
+  min-height: 720px;
+
+  &.teams-8 {
+    .roster {
+      width: 11.6%;
+    }
+  }
 
   .roster { 
     margin-top: 20px ;
@@ -175,8 +188,9 @@
 
   .current_pick {
     float: left;
-    padding: 10px 0 10px 10px;
+    padding: 10px;
     background: #000;
+    text-align: center;
 
     .info {
       margin-bottom: 10px;
@@ -195,6 +209,7 @@
     .future_pick {
       float: left;
       margin-right: 10px;
+      width: 9%;
 
       img {
         display: block;
@@ -228,7 +243,7 @@
 
   img {
     height: 70px;
-    float: left;
+    // float: left;
   }
   .current_drafter {
   }
@@ -279,6 +294,7 @@
   }
 
   .stats {
+    display: none;
     float: left;
     padding: 8px 20px;
     border-radius: 10px;

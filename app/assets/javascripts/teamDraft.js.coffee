@@ -58,10 +58,10 @@ window.TeamDraft =
     #hide other modals and show pick modal
     TeamDraft.playersView.hideModals()
 
-    draftPick = data
+    draftPick = jQuery.parseJSON(data.draftPick)
     @showPickModal(draftPick)
 
-    @update()
+    @update(data)
 
   draftPickMissed: (data) ->
     #hide other modals and show missed modal
@@ -69,43 +69,28 @@ window.TeamDraft =
 
     @showMissedModal()
 
-    @update()
+    @update(data)
 
-  update: ->
-
-    #update data
-    self = @
-
-    if @team?
-      data = 
-        id: @league.id
-        team_id: @team.id
-    else
-      data =
-        id: @league.id
-
-    $.getJSON "/api/leagues/draft_info.json",
-      data
-    , (data) ->
+  update: (data) ->
       
-      #set objects
-      @league = jQuery.parseJSON(data.league)
-      @current_pick = jQuery.parseJSON(data.current_pick)
-      future_picks = jQuery.parseJSON(data.future_picks)
-      available_players = jQuery.parseJSON(data.available_players)
-      rosters = jQuery.parseJSON(data.rosters)
-      team = jQuery.parseJSON(data.team)
-      
-      console.log data   
+    #set objects
+    @league = jQuery.parseJSON(data.league)
+    @current_pick = jQuery.parseJSON(data.currentPick)
+    future_picks = jQuery.parseJSON(data.futurePicks)
+    available_players = jQuery.parseJSON(data.availablePlayers)
+    rosters = jQuery.parseJSON(data.rosters)
+    team = jQuery.parseJSON(data.team)
+    
+    console.log data   
 
-      #update timer
-      TeamDraft.timerView.start(@current_pick.timestamp)
+    #update timer
+    TeamDraft.timerView.start(@current_pick.timestamp)
 
-      #update round info
-      TeamDraft.roundInfoView.update(@current_pick, future_picks)
+    #update round info
+    TeamDraft.roundInfoView.update(@current_pick, future_picks)
 
-      #update players view
-      TeamDraft.playersView.update(@current_pick, available_players, @league, rosters, team)
+    #update players view
+    TeamDraft.playersView.update(@current_pick, available_players, @league, rosters, team)
 
 
 

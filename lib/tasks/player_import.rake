@@ -13,7 +13,7 @@ namespace :my_fantasy_league do
 
   desc "Update ADP from MyFantasyLeague"
   task :update_adp => :environment do
-		response = HTTParty.get("http://football.myfantasyleague.com/2013/export?TYPE=adp&FRANCHISES=12&IS_PPR=0&JSON=1")
+		response = HTTParty.get("http://football.myfantasyleague.com/2013/export?TYPE=adp&JSON=1")
 		response["adp"]["player"].each do |player|
 			database_player = Player.find_by_yahooid(player["id"])
 			database_player.update_attributes(adp: player["averagePick"]) if database_player
@@ -47,14 +47,6 @@ namespace :my_fantasy_league do
     Player.where(position: "DEF").each do |defense|
       defense.name = defense.name.split(" ")[0]
       defense.save
-    end
-  end
-
-  desc "Update QB ADP"
-  task :update_qb_adp => :environment do
-    Player.where(position: "QB").each do |player|
-      player.adp = player.adp - (player.adp * 0.7)
-      player.save
     end
   end
 

@@ -1,1 +1,0 @@
-<h2><%=@team.name%> missed their pick. What a maroon!</h2>

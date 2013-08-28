@@ -1,5 +1,0 @@
-<input type="hidden" value="<%=@round%>" id="round" />
-<input type="hidden" value="<%=@pick%>" id="pick" />
-<input type="hidden" value="<%=@team_id%>" id="team_id" />
-<input type="hidden" value="<%=@team_id%>" id="current_team" />
-<input type="hidden" value="<%=@pause%>"" id="pause" />

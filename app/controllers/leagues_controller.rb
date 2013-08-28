@@ -49,6 +49,9 @@ class LeaguesController < ApplicationController
   def draft
     @league = League.find(params[:id])
     @current_pick = @league.current_pick
+    @upcoming_picks = DraftPick.where("league_id = ? AND player_id is NULL AND id != ?", params[:id], @current_pick.id).limit(9).order("round desc, pick desc")
+    @available_players = Player.available_for_league(params[:id]).limit(10)
+    @rosters = Team.where(league_id: params[:id]).order(:pick) 
   end
 
   def draftboard

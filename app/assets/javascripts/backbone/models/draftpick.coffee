@@ -1,1 +1,0 @@
-class DraftFu.Models.DraftPick extends Backbone.Model

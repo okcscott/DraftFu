@@ -64,7 +64,7 @@ class Api::PlayersController < ApplicationController
           next_pick.timestamp = Time.now + 2.seconds
           next_pick.save
           @league.save
-          Pusher['draft'].trigger('pick_made', {draftPick: @draftPick.to_json(:include => [:player, :team])})
+          Pusher['draft'].trigger('pick_made', draft_info_json(@league.id, @draftPick))
           render json: @draftPick
         else
           #THE DRAFT IS OVER!!
@@ -79,5 +79,15 @@ class Api::PlayersController < ApplicationController
     else
       render json: "Something Went Wrong!", status: :unprocessable_entity
     end
+  end
+
+  def draft_info_json(league_id, draftPick)
+    @league = League.find(league_id)
+    @current_pick = @league.current_pick
+    @upcoming_picks = DraftPick.where("league_id = ? AND player_id is NULL AND id != ?", league_id, @current_pick.id).limit(9).order("round desc, pick desc")
+    @available_players = Player.available_for_league(league_id).limit(10)
+    @rosters = Team.where(league_id: league_id).order(:pick)
+    @team = @draftPick.team
+    {league: @league.to_json, currentPick: @current_pick.to_json(:include => {:team => {:include => {:draftPicks => {:include => :player}}}}), futurePicks: @upcoming_picks.to_json(:include => :team), availablePlayers: @available_players.to_json, rosters: @rosters.to_json(:include => {:draftPicks => {:include => :player }}), team: @team.to_json(:include => {:draftPicks => {:include => :player}}), draftPick: @draftPick.to_json(:include => [:player, :team])}
   end
 end

@@ -15,11 +15,11 @@ $(document).ready ->
       $('audio')[0].play()
 
   channel.bind 'pick_made', (data) ->
-    DraftFu.Mediator.publish("pick:made", jQuery.parseJSON(data.draftPick))
+    DraftFu.Mediator.publish("pick:made", data)
     playMusic()
 
   channel.bind 'pick_missed', (data) -> 
-    DraftFu.Mediator.publish("pick:missed")
+    DraftFu.Mediator.publish("pick:missed", data)
     playMusic()
 
   channel.bind 'pause', (data) -> 
@@ -34,21 +34,6 @@ $(document).ready ->
     console.log "draft is over"
     DraftFu.Mediator.publish("draft:end")
     playMusic()
-
-  # if $('#draft_view').val()
-
-    # channel.bind 'pick_made', (data) ->  
-
-    #   DraftFu.Mediator.publish("pick:made", data)
-
-      # view = new window.app.PickMadeView
-      #   model: jQuery.parseJSON(data.message.player)
-      #   team: jQuery.parseJSON(data.message.team)
-      # view.render()
-
-      # playMusic()
-
-      # app.LeagueInfo.fetch()
 
     
 

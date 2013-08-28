@@ -47,45 +47,40 @@ window.Draftboard =
         $('.pickMissedModal').modal("hide")
       ), 2000
 
-  draftPickMissed: ->
+  draftPickMissed: (data) ->
     @showMissedModal()
 
-    @update()
+    @update(data)
 
   draftPickMade: (data) ->
-    draftPick = data
+    draftPick = jQuery.parseJSON(data.draftPick)
     @showPickModal(draftPick)
 
-    @update()
+    @update(data)
 
-  update: ->
-
-    #update data
-    self = @
-    $.getJSON "/api/leagues/draft_info.json",
-      id: @league.id
-    , (data) ->
+  update: (data) ->
       
-      #set objects
-      @league = jQuery.parseJSON(data.league)
-      @current_pick = jQuery.parseJSON(data.current_pick)
-      future_picks = jQuery.parseJSON(data.future_picks)
-      available_players = jQuery.parseJSON(data.available_players)
-      rosters = jQuery.parseJSON(data.rosters)      
+    #set objects
+    @league = jQuery.parseJSON(data.league)
+    @current_pick = jQuery.parseJSON(data.currentPick)
+    future_picks = jQuery.parseJSON(data.futurePicks)
+    available_players = jQuery.parseJSON(data.availablePlayers)
+    rosters = jQuery.parseJSON(data.rosters)      
 
-      #update timer
-      Draftboard.timerView.start(@current_pick.timestamp)
+    #update timer
+    Draftboard.timerView.start(@current_pick.timestamp)
 
-      # update round info
-      Draftboard.roundInfoView.update(@current_pick, future_picks)
+    # update round info
+    Draftboard.roundInfoView.update(@current_pick, future_picks)
 
-      #update rosters view
-      Draftboard.rostersView.update(rosters, @current_pick)
+    #update rosters view
+    Draftboard.rostersView.update(rosters, @current_pick)
 
   pauseDraft: ->
     Draftboard.timerView.pause()
 
   resumeDraft: (data) ->
+    console.log data
     Draftboard.timerView.start(data.timestamp)
 
   timerElapsed: ->

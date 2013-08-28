@@ -4,9 +4,3 @@ window.DraftFu =
   Views: {}
   Routers: {}
   init: ->
-
-
-
-@app = window.app ? {}
-
-jQuery ->
