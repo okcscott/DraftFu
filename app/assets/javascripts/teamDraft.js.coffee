@@ -22,9 +22,10 @@ window.TeamDraft =
     unless league.pause
       TeamDraft.timerView.start(@current_pick.timestamp)
 
-  draftEnd: ->
+  draftEnd: (data) ->
     TeamDraft.playersView.hideModals()
     $('.draftEnd').modal()
+    @update(data)
     TeamDraft.timerView.pause()
 
     setTimeout (->

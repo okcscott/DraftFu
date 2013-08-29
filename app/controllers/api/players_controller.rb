@@ -70,7 +70,7 @@ class Api::PlayersController < ApplicationController
           #THE DRAFT IS OVER!!
           @league.pause = true
           @league.save
-          Pusher['draft'].trigger("end_draft", {})
+          Pusher['draft'].trigger("end_draft", draft_info_json(@league.id, @draftPick))
           render :nothing => true, :status => 200, :content_type => 'text/html'
         end
       else

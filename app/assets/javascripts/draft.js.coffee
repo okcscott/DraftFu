@@ -31,8 +31,7 @@ $(document).ready ->
     playMusic()
 
   channel.bind 'end_draft', (data) -> 
-    console.log "draft is over"
-    DraftFu.Mediator.publish("draft:end")
+    DraftFu.Mediator.publish("draft:end", data)
     playMusic()
 
     

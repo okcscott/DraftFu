@@ -22,8 +22,9 @@ window.Draftboard =
 
     unless @league.pause
       Draftboard.timerView.start(current_pick.timestamp)
-  draftEnd: ->
+  draftEnd: (data) ->
     $('.draftEnd').modal()
+    @update(data)
     Draftboard.timerView.pause()
 
     setTimeout (->
