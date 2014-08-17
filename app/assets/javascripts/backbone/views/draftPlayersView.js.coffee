@@ -27,6 +27,10 @@ class DraftFu.Views.DraftPlayersView extends Backbone.View
     "click #scrolling_draft_board .control" : "draftboard_click"
     "click .available_player.draftable" : "confirmPick"
     "click .confirmModal .btn-primary" : "makePick"
+    "click .my-roster-icon" : "showRoster"
+
+  showRoster: ->
+    $('#my-roster-wrapper').modal()
 
   update: (current_pick, available_players, league, rosters, team)->
     @current_pick = current_pick
@@ -46,7 +50,7 @@ class DraftFu.Views.DraftPlayersView extends Backbone.View
 
   hideModals: ->
     $('.confirmModal, .submittingModal, .errorModal').modal("hide")
-    
+
   show_pick_modal: ->
     $('.confirmModal, .submittingModal, .errorModal').modal("hide")
     $('.pickMadeModal .team_name').html(@current_pick.team.name)
@@ -72,7 +76,7 @@ class DraftFu.Views.DraftPlayersView extends Backbone.View
       type: "POST"
       url: "/api/players/draft"
       data: {team_id: @current_pick.team_id, player_id: player_id, league_id: @league.id}
-      error: (jqXHR, textStatus, errorThrown)->        
+      error: (jqXHR, textStatus, errorThrown)->
         $('.submittingModal').modal("hide")
         $('.errorModal .reason').html(jqXHR.responseText)
         $('.errorModal').modal()
@@ -95,7 +99,7 @@ class DraftFu.Views.DraftPlayersView extends Backbone.View
       position.addClass('active')
       @position_filter = position.data("position")
       @filter()
-    
+
   filter: ->
     self = @
     $.getJSON "/api/players/available.json",

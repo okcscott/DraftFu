@@ -12,7 +12,7 @@ class Api::PlayersController < ApplicationController
     name = params[:name]
     position = params[:position]
 
-    #get the rest of them    
+    #get the rest of them
     player_scope = Player.available_for_league(params[:league_id]).limit(limit)
 
     if name
@@ -54,8 +54,9 @@ class Api::PlayersController < ApplicationController
       @draftPick.missed = false
 
       #determine ADPD
+      # ADPD = ceil ((ADP - pick_number) / 10)
       pick_number = (((@draftPick.round-1)*@league.teams.count) + @draftPick.pick)
-      @draftPick.adpd = @player.adp - pick_number
+      @draftPick.adpd = ((@player.adp - pick_number) / 10).ceil
 
       if @draftPick.save
         if DraftPick.where("league_id = ? AND player_id is NULL", @league.id).count > 0

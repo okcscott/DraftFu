@@ -1,9 +1,9 @@
-#http://football.myfantasyleague.com/2013/export
+#http://football.myfantasyleague.com/2014/export
 namespace :my_fantasy_league do
   desc "Import players from MyFantasyLeague"
   task :import_players => :environment do
 		valid_positions = ["Def","QB","RB","WR","TE","PK"]
-		response = HTTParty.get("http://football.myfantasyleague.com/2013/export?TYPE=players&L=&W=&JSON=1")
+		response = HTTParty.get("http://football.myfantasyleague.com/2014/export?TYPE=players&L=&W=&JSON=1")
 		response["players"]["player"].each do |player|
 			if (valid_positions.include? player["position"]) and (!Player.exists?(yahooid: player["id"]))
 				Player.create(name: player["name"], yahooid: player["id"], team: player["team"], position: player["position"].upcase)
@@ -13,7 +13,7 @@ namespace :my_fantasy_league do
 
   desc "Update ADP from MyFantasyLeague"
   task :update_adp => :environment do
-		response = HTTParty.get("http://football.myfantasyleague.com/2013/export?TYPE=adp&JSON=1")
+		response = HTTParty.get("http://football.myfantasyleague.com/2014/export?TYPE=adp&JSON=1")
 		response["adp"]["player"].each do |player|
 			database_player = Player.find_by_yahooid(player["id"])
 			database_player.update_attributes(adp: player["averagePick"]) if database_player
@@ -35,7 +35,7 @@ namespace :my_fantasy_league do
       player.name = "#{names[1]} #{names[0].gsub(" ","")}"
       player.save
     end
-  end  
+  end
 
   desc "Remove Aaron Hernandez"
   task :remove_players => :environment do
@@ -59,5 +59,5 @@ namespace :my_fantasy_league do
         player.save
       end
     end
-  end  
+  end
 end

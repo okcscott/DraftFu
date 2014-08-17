@@ -17,29 +17,29 @@ class Api::LeaguesController < ApplicationController
   end
 
   def start_draft
-    @league = League.find(params[:league_id])
-    @teams = Team.where(league_id: params[:league_id]).order(:pick)
-    total_teams = @league.teams.count
-    total_rounds = @league.roster_spots
-    total_picks = total_teams * total_rounds
+    # @league = League.find(params[:league_id])
+    # @teams = Team.where(league_id: params[:league_id]).order(:pick)
+    # total_teams = @league.teams.count
+    # total_rounds = @league.roster_spots
+    # total_picks = total_teams * total_rounds
 
-    round = 1
-    pick = 1
+    # round = 1
+    # pick = 1
 
-    for i in 1..total_picks
-      #find the right team
-      index = round.odd? ? (pick - 1) : (pick - total_teams).abs
+    # for i in 1..total_picks
 
-      draft_pick = DraftPick.new(round: round, pick: pick, team_id: @teams[index].id, league_id: @league.id)
-      draft_pick.save
+    #   #which order are the teams in / snake draft
+    #   teams_in_order_for_round = round.odd? ? @teams : @teams.reverse
 
-      if pick == total_teams
-        round += 1
-        pick = 1
-      else
-        pick += 1
-      end
-    end
+    #   DraftPick.create(round: round, pick: pick, team_id: teams_in_order_for_round[pick-1].id, league_id: @league.id)
+
+    #   if pick == total_teams
+    #     round += 1
+    #     pick = 1
+    #   else
+    #     pick += 1
+    #   end
+    # end
   end
 
   def picks_queue
@@ -48,7 +48,7 @@ class Api::LeaguesController < ApplicationController
 
     @draft_picks = DraftPick.where(league_id: @league.id, player_id: nil).limit(number_of_picks)
     @last_picks = DraftPick.unscoped.where("league_id = ? and player_id is not NULL", @league.id).order("updated_at DESC").limit(2)
-    
+
     # picks = [@last_pick]
     # picks = picks + @draft_picks
     picks = @last_picks.reverse + @draft_picks

@@ -18,23 +18,23 @@ $(document).ready ->
     DraftFu.Mediator.publish("pick:made", data)
     playMusic()
 
-  channel.bind 'pick_missed', (data) -> 
+  channel.bind 'pick_missed', (data) ->
     DraftFu.Mediator.publish("pick:missed", data)
     playMusic()
 
-  channel.bind 'pause', (data) -> 
+  channel.bind 'pause', (data) ->
     DraftFu.Mediator.publish("draft:pause")
     playMusic()
 
-  channel.bind 'resume', (data) -> 
+  channel.bind 'resume', (data) ->
     DraftFu.Mediator.publish("draft:resume", jQuery.parseJSON(data.currentPick))
     playMusic()
 
-  channel.bind 'end_draft', (data) -> 
+  channel.bind 'end_draft', (data) ->
     DraftFu.Mediator.publish("draft:end", data)
     playMusic()
 
-    
+
 
 
 

@@ -6,7 +6,3 @@
       %b= player.rank
     %span= player.name
     =link_to "draft", "#", class: "draft_player", data: {team: @league.current_team.id, player: player.id}
-
-%script#player_template{type="template/html"}
-  %div=name
-%script#players_template{type="template/html"}

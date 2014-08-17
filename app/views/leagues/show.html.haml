@@ -1,7 +1,7 @@
 %h2=@league.name
 %h3 Teams
 - if @league.teams.empty?
-  %p 
+  %p
     You need to add some teams
     =link_to "click here", {:controller=>"teams",:action=>"new",:league_id=>@league.id}
 - else
@@ -9,11 +9,17 @@
     -for team in @league.teams
       %li
         =team.name
-        =link_to "edit", edit_league_team_path(team)
+        =link_to "edit", "/leagues/#{@league.id}/teams/#{team.id}/edit"
         /=link_to "draft", draft_team_path(team)
     %li
       Add another team
       =link_to "click here", {:controller=>"teams",:action=>"new",:league_id=>@league.id}
 %h3 Draft
-%p= "<b>Round:</b> #{@league.round} | <b>Pick:</b> #{@league.pick}".html_safe
-/=link_to "Go to the draft", league_draft_path(@league)
+- if @league.draftPicks.empty?
+  %p
+    Before you can start the draft, confirm that you have all of your teams added in the correct draft order. Is all of that done?
+    = link_to "Setup the Draft", setup_draft_league_path(@league.id), method: :post
+
+-else
+  %p= "<b>Round:</b> #{@league.round} | <b>Pick:</b> #{@league.pick}".html_safe
+  =link_to "Go to the draft", league_draft_path(@league.id)

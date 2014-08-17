@@ -4,100 +4,100 @@ teams:
   bye_week: 0
  -
   name: "PIT"
-  bye_week: 5
+  bye_week: 12
  -
   name: "IND"
-  bye_week: 8
+  bye_week: 10
  -
   name: "BAL"
-  bye_week: 8
+  bye_week: 11
  -
   name: "FA"
   bye_week: 0
  -
   name: "NYG"
-  bye_week: 9
+  bye_week: 8
  -
   name: "WAS"
-  bye_week: 5
- -
-  name: "CHI"
-  bye_week: 8
- -
-  name: "NYJ"
   bye_week: 10
  -
+  name: "CHI"
+  bye_week: 9
+ -
+  name: "NYJ"
+  bye_week: 11
+ -
   name: "NOS"
-  bye_week: 7
+  bye_week: 6
  -
   name: "TEN"
-  bye_week: 8
+  bye_week: 9
  -
   name: "DET"
   bye_week: 9
  -
   name: "SFO"
-  bye_week: 9
+  bye_week: 8
  -
   name: "NEP"
   bye_week: 10
  -
   name: "HOU"
-  bye_week: 8
+  bye_week: 10
  -
   name: "CAR"
-  bye_week: 4
+  bye_week: 12
  -
   name: "KCC"
-  bye_week: 10
+  bye_week: 6
  -
   name: "SDC"
-  bye_week: 8
- -
-  name: "CLE"
   bye_week: 10
  -
+  name: "CLE"
+  bye_week: 4
+ -
   name: "CIN"
-  bye_week: 12
+  bye_week: 4
  -
   name: "DAL"
   bye_week: 11
  -
   name: "TBB"
-  bye_week: 5
- -
-  name: "MIN"
-  bye_week: 5
- -
-  name: "OAK"
   bye_week: 7
  -
+  name: "MIN"
+  bye_week: 10
+ -
+  name: "OAK"
+  bye_week: 5
+ -
   name: "ATL"
-  bye_week: 6
+  bye_week: 9
  -
   name: "ARI"
-  bye_week: 9
- -
-  name: "DEN"
-  bye_week: 9
- -
-  name: "PHI"
-  bye_week: 12
- -
-  name: "GBP"
   bye_week: 4
  -
-  name: "STL"
-  bye_week: 11
+  name: "DEN"
+  bye_week: 4
  -
-  name: "SEA"
-  bye_week: 12
+  name: "PHI"
+  bye_week: 7
  -
-  name: "BUF"
-  bye_week: 12
- -
-  name: "JAC"
+  name: "GBP"
   bye_week: 9
  -
+  name: "STL"
+  bye_week: 4
+ -
+  name: "SEA"
+  bye_week: 4
+ -
+  name: "BUF"
+  bye_week: 9
+ -
+  name: "JAC"
+  bye_week: 11
+ -
   name: "MIA"
-  bye_week: 6
+  bye_week: 5

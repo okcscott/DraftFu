@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     %script{ src: "http://js.pusher.com/1.12/pusher.min.js"}
     = tag :meta, :name => "pusher-key", :content => Pusher.key
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script>google.load("visualization", "1", {packages:["corechart"]})</script>
   %body
     / - unless notice.nil? and alert.nil?
     /   #flash_msg
@@ -14,11 +16,11 @@
     /       %p.notice= notice
     /       %p.alert= alert
     / - if current_user
-    /   %p 
-    /     Logged in as 
+    /   %p
+    /     Logged in as
     /     = current_user.email
     /   = link_to "Log out", logout_path
     / - else
     /   = link_to "Sign Up", signup_path
-    /   = link_to "Log In", login_path      
+    /   = link_to "Log In", login_path
     = yield

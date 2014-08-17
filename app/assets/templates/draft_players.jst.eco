@@ -1,6 +1,6 @@
 <div class="row-fluid">
-  <div class="span6 available_players_wrapper">
-    <h2>Available Players</h2>
+  <div class="span12 available_players_wrapper">
+    <h2><span class="my-roster-icon">&#9776;</span>Available Players</h2>
     <div class="filters">
       <div class="positions">
         <span class="active" data-position="">All</span>
@@ -19,27 +19,29 @@
     </div>
   </div>
   <div class="span6 roster_wrapper">
+  </div>
+</div>
+<div id="my-roster-wrapper" class="modal hide">
+  <div>
     <h2>My Roster</h2>
-    <div id="my_roster">
-      <% for draftPick in (if @static_roster then @team.draftPicks else @current_pick.team.draftPicks): %>
-        <% if draftPick.player_id is null: %>
-          <div class="empty_pick">
-            Round <%= draftPick.round %>
-          </div>
-        <% else: %>
-          <div class="chosen_pick <%= draftPick.player.position %>">
-            <span class="name"><%= draftPick.player.name %></span>
-            <span class="position"><%= draftPick.player.position %></span>
-            <span class="bye_week"><%= draftPick.player.bye_week %></span>
-          </div>
-        <% end %>
+    <a href="#" class="close" data-dismiss="modal">x</a>
+    <div class="clear"></div>
+  </div>
+  <div id="my_roster">
+    <% for draftPick in (if @static_roster then @team.draftPicks else @current_pick.team.draftPicks): %>
+      <% unless draftPick.player_id is null: %>
+        <div class="chosen_pick <%= draftPick.player.position %>">
+          <span class="name"><%= draftPick.player.name %></span>
+          <span class="position"><%= draftPick.player.position %></span>
+          <span class="bye_week"><%= draftPick.player.bye_week %></span>
+        </div>
       <% end %>
-    </div>
+    <% end %>
   </div>
 </div>
 <div id="scrolling_draft_board">
   <div class="control inactive">Show/Hide Draftboard</div>
-  <div class="table_wrapper">  
+  <div class="table_wrapper">
   </div>
 </div>
 <div class="modal hide fade confirmModal">

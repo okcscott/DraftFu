@@ -9,11 +9,11 @@ class DraftFu.Models.Roster extends Backbone.Model
 
     adpd_average = (adpd_total/picked_players.length)
 
-    final_grade = switch 
-      when (adpd_average < 3) then "a"
-      when (adpd_average < 15) then "b"
-      when (adpd_average < 25) then "c"
-      when (adpd_average < 35) then "d"
+    final_grade = switch
+      when (adpd_average < 1) then "a"
+      when (adpd_average < 2) then "b"
+      when (adpd_average < 3) then "c"
+      when (adpd_average < 4) then "d"
       else "f"
-      
+
     final_grade

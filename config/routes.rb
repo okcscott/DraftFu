@@ -3,7 +3,7 @@ Draftfu::Application.routes.draw do
   get "draft/league/:league_id" => "draft#league", as: :league_draft
 
   match "draft/team/:league_id" => "draft#team", as: :team_draft
-  
+
   match "draft/player" => "draft#player", via: :post
 
   get "home/index"
@@ -12,21 +12,25 @@ Draftfu::Application.routes.draw do
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "signup" => "users#new", :as => "signup"
-  
+
   resources :users
   resources :sessions
 
   resources :leagues do
-    get 'draftboard', on: :member
-    get 'draft', on: :member
-    get 'team_draft', on: :member
+    member do
+      get 'draftboard'
+      get 'draft'
+      get 'team_draft'
+      post 'setup_draft'
+    end
+
     resources :teams do
       get 'draft', on: :member
       get 'draftboard', on: :member
     end
   end
   resources :players
-  
+
   root :to => "home#index"
 
   namespace :api do

@@ -9,7 +9,7 @@ class DraftFu.Views.RostersView extends Backbone.View
   render: ->
     @$el.html(@template(@))
 
-  isActive: (draftPick) ->    
+  isActive: (draftPick) ->
     if ((draftPick.round == @current_pick.round) and (draftPick.pick == @current_pick.pick)) then "active" else ""
 
   isMissed: (draftPick) ->
@@ -21,11 +21,11 @@ class DraftFu.Views.RostersView extends Backbone.View
     @render()
 
   grade: (draftPick) ->
-    final_grade = switch 
-      when (draftPick.adpd < 3) then "a"
-      when (draftPick.adpd < 15) then "b"
-      when (draftPick.adpd < 25) then "c"
-      when (draftPick.adpd < 35) then "d"
+    final_grade = switch
+      when (draftPick.adpd < 1) then "a"
+      when (draftPick.adpd < 2) then "b"
+      when (draftPick.adpd < 3) then "c"
+      when (draftPick.adpd < 4) then "d"
       else "f"
 
     final_grade

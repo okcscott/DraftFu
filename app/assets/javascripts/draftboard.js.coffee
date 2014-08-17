@@ -12,6 +12,9 @@ window.Draftboard =
     Draftboard.rostersView = new DraftFu.Views.RostersView(rosters, current_pick)
     Draftboard.rostersView.render()
 
+    Draftboard.dashboardView = new DraftFu.Views.DashboardView(current_pick)
+    Draftboard.dashboardView.render()
+
     Draftboard.timerView.bind("timer:click", @timerClick, @)
     Draftboard.timerView.bind("timer:elapsed", @timerElapsed, @)
     DraftFu.Mediator.subscribe("draft:resume", @resumeDraft, {}, @)
@@ -60,13 +63,13 @@ window.Draftboard =
     @update(data)
 
   update: (data) ->
-      
+
     #set objects
     @league = jQuery.parseJSON(data.league)
     @current_pick = jQuery.parseJSON(data.currentPick)
     future_picks = jQuery.parseJSON(data.futurePicks)
     available_players = jQuery.parseJSON(data.availablePlayers)
-    rosters = jQuery.parseJSON(data.rosters)      
+    rosters = jQuery.parseJSON(data.rosters)
 
     #update timer
     Draftboard.timerView.start(@current_pick.timestamp)
@@ -76,6 +79,8 @@ window.Draftboard =
 
     #update rosters view
     Draftboard.rostersView.update(rosters, @current_pick)
+
+    Draftboard.dashboardView.update(@current_pick)
 
   pauseDraft: ->
     Draftboard.timerView.pause()
@@ -88,7 +93,7 @@ window.Draftboard =
     $.ajax
       type: "POST"
       url: "/api/leagues/missed_pick"
-      data: {league_id: @league.id}   
+      data: {league_id: @league.id}
 
   timerClick: ->
     if @league.pause
@@ -96,13 +101,12 @@ window.Draftboard =
       $.ajax
         type: "POST"
         url: "/api/leagues/resume_draft"
-        data: {league_id: @league.id}    
+        data: {league_id: @league.id}
     else
       @league.pause = true
       $.ajax
         type: "POST"
         url: "/api/leagues/pause_draft"
-        data: {league_id: @league.id} 
-      
+        data: {league_id: @league.id}
 
-    
+
