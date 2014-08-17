@@ -14,7 +14,7 @@ gem 'eco'
 gem 'bootstrap-sass', '~> 2.3.2.1'
 gem 'jquery-rails'
 gem "haml-rails"
-gem 'json', '~> 1.8.1'
+gem 'json', '~> 1.7.6'
 
 # Gems used only for assets and not required
 # in production environments by default.
