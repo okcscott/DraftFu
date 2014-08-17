@@ -1,5 +1,13 @@
 #http://football.myfantasyleague.com/2014/export
 namespace :my_fantasy_league do
+  task :all => [:cleanup, :import_players, :update_adp, :set_bye_weeks, :convert_names, :convert_team_names, :set_blank_adp]
+
+  desc "Delete all of last years data"
+  task :cleanup => :environment do
+    Player.delete_all
+    DraftPick.delete_all
+  end
+
   desc "Import players from MyFantasyLeague"
   task :import_players => :environment do
 		valid_positions = ["Def","QB","RB","WR","TE","PK"]
