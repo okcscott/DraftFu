@@ -1,6 +1,7 @@
 <div class="info-wrapper">
   <div class="current-pick info">
     <h3>On the Clock</h3>
+    <h4><%= @current_pick.team.name %></h4>
     <img src="https://s3.amazonaws.com/draftfu/<%=@current_pick.team.image%>" />
   </div>
   <div class="info grade">

@@ -38,7 +38,7 @@ class DraftFu.Views.RoundInfoView extends Backbone.View
     roundStart = new Date(@model.get("timestamp"))
     roundEnd = new Date(@model.get("timestamp"))
     roundEnd.setMinutes(roundEnd.getMinutes() + 2)
-    now = new Date()
+    now = new Date() + window.time_difference
     String(Math.max(0,(roundEnd.getTime() - now.getTime())/1000))
 
   update: (current_pick, future_picks) ->

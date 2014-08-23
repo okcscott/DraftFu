@@ -9,6 +9,7 @@
     = tag :meta, :name => "pusher-key", :content => Pusher.key
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script>google.load("visualization", "1", {packages:["corechart"]})</script>
+    <script>window.time_difference = (#{Time.now.to_i * 1000} - Date.now()) </script>
   %body
     / - unless notice.nil? and alert.nil?
     /   #flash_msg
