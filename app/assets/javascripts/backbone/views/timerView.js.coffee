@@ -1,7 +1,7 @@
 class DraftFu.Views.TimerView extends Backbone.View
   String::pad = (l, s) ->
     (if (l -= @length) > 0 then (s = new Array(Math.ceil(l / s.length) + 1).join(s)).substr(0, s.length) + this + s.substr(0, l - s.length) else this)
-    
+
   template: JST["timer"]
   el: "#timer"
 
@@ -44,7 +44,7 @@ class DraftFu.Views.TimerView extends Backbone.View
     @reset()
 
   timerUpdate: ->
-    seconds = Math.ceil((@endTimestamp - (new Date()).getTime())/1000)
+    seconds = Math.ceil((@endTimestamp - (new Date()).getTime() + window.time_difference)/1000)
     if seconds <= 0
       @trigger("timer:elapsed")
       window.clearInterval @timerId
