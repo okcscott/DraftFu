@@ -44,7 +44,7 @@ class DraftFu.Views.TimerView extends Backbone.View
     @reset()
 
   timerUpdate: ->
-    seconds = Math.ceil((@endTimestamp - (new Date()).getTime() + window.time_difference)/1000)
+    seconds = Math.ceil((@endTimestamp - (new Date()).getTime() - window.time_difference)/1000)
     if seconds <= 0
       @trigger("timer:elapsed")
       window.clearInterval @timerId
